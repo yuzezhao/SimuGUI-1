@@ -1,0 +1,366 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>moc;h;cpp</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="ProcessBarPlug-in">
+      <UniqueIdentifier>{89666c5f-c28b-4096-b320-4a822db64f67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ProcessBarPlug-in\Header Files">
+      <UniqueIdentifier>{352d871b-0985-45aa-9e2b-b4a71e2d3d3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ProcessBarPlug-in\Source Files">
+      <UniqueIdentifier>{1d028768-95cf-42ab-bd4f-6165a43ed240}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DialPlug-in">
+      <UniqueIdentifier>{bab4ba14-b133-45c3-9125-4c7458d8865e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DialPlug-in\Header Files">
+      <UniqueIdentifier>{7e334db6-29d4-429f-8ba0-54698118fb9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DialPlug-in\Source Files">
+      <UniqueIdentifier>{6ceb4c00-d76b-4d22-97d4-d5d2cf51e574}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CanPool">
+      <UniqueIdentifier>{dccbbae3-6f88-4dc9-a5d2-61bbea01d64a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CanPool\Header Files">
+      <UniqueIdentifier>{7841aad0-1b71-4467-b9b3-eb835b24302d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CanPool\Source Files">
+      <UniqueIdentifier>{95e676bf-7430-4d04-b81c-437e37984add}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main">
+      <UniqueIdentifier>{c33d2a70-81a2-437d-8457-7ad4ed1f0bf8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="main\Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="CustomPlotPlug-in">
+      <UniqueIdentifier>{9f2427db-4804-449b-8166-86dfb191bb2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CustomPlotPlug-in\Header Files">
+      <UniqueIdentifier>{018606c8-8225-456c-8ad4-ec576b69c3b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CustomPlotPlug-in\Source Files">
+      <UniqueIdentifier>{f880435b-1a43-48a9-ad35-bc3d6009f314}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mode">
+      <UniqueIdentifier>{839467c6-89b7-4ab8-9b6f-c25e81d14eef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mode\Source Files">
+      <UniqueIdentifier>{69915b81-7fc7-4cb0-a6e5-5b30a3da12e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mode\Header Files">
+      <UniqueIdentifier>{d9000051-62b2-4c94-b313-29288cd0965d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="SimuGUI.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="SimuGUI.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="ctablewidget.h">
+      <Filter>main\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="mainwindow.h">
+      <Filter>main\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="skindialog.h">
+      <Filter>main\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="colorprogressbar.h">
+      <Filter>ProcessBarPlug-in\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="qroundprogressbar.h">
+      <Filter>ProcessBarPlug-in\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="stateprogressbar.h">
+      <Filter>ProcessBarPlug-in\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="waitprogressbar.h">
+      <Filter>ProcessBarPlug-in\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="dialplot.h">
+      <Filter>DialPlug-in\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="dashboard.h">
+      <Filter>DialPlug-in\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="centralarea.h">
+      <Filter>CanPool\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="fancybanner.h">
+      <Filter>CanPool\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="fancybar.h">
+      <Filter>CanPool\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="fancybutton.h">
+      <Filter>CanPool\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="fancydialog.h">
+      <Filter>CanPool\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="fancynavbar.h">
+      <Filter>CanPool\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="fancynavbutton.h">
+      <Filter>CanPool\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="fancytab.h">
+      <Filter>CanPool\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="fancytabbar.h">
+      <Filter>CanPool\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="fancytabwidget.h">
+      <Filter>CanPool\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="fancywindow.h">
+      <Filter>CanPool\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="imode.h">
+      <Filter>CanPool\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="imodebar.h">
+      <Filter>CanPool\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="imodebar_p.h">
+      <Filter>CanPool\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="imodebutton.h">
+      <Filter>CanPool\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="minicard.h">
+      <Filter>CanPool\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="minisplitter.h">
+      <Filter>CanPool\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="ministack.h">
+      <Filter>CanPool\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="modemanager.h">
+      <Filter>CanPool\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="pagesorter.h">
+      <Filter>CanPool\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="quickaccessbar.h">
+      <Filter>CanPool\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="simplefilter.h">
+      <Filter>CanPool\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="skinitem.h">
+      <Filter>CanPool\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="tinytabwidget.h">
+      <Filter>CanPool\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="fancybanner.cpp">
+      <Filter>CanPool\Source Files</Filter>
+    </QtMoc>
+    <QtMoc Include="fancybar.cpp">
+      <Filter>CanPool\Source Files</Filter>
+    </QtMoc>
+    <QtMoc Include="fancynavbar.cpp">
+      <Filter>CanPool\Source Files</Filter>
+    </QtMoc>
+    <QtMoc Include="fancytabbar.cpp">
+      <Filter>CanPool\Source Files</Filter>
+    </QtMoc>
+    <QtMoc Include="minicard.cpp">
+      <Filter>CanPool\Source Files</Filter>
+    </QtMoc>
+    <QtMoc Include="ministack.cpp">
+      <Filter>CanPool\Source Files</Filter>
+    </QtMoc>
+    <QtMoc Include="modemanager.cpp">
+      <Filter>CanPool\Source Files</Filter>
+    </QtMoc>
+    <QtMoc Include="quickaccessbar.cpp">
+      <Filter>CanPool\Source Files</Filter>
+    </QtMoc>
+    <QtMoc Include="simplefilter.cpp">
+      <Filter>CanPool\Source Files</Filter>
+    </QtMoc>
+    <QtMoc Include="tinytabwidget.cpp">
+      <Filter>CanPool\Source Files</Filter>
+    </QtMoc>
+    <QtMoc Include="fcustomplot.h">
+      <Filter>CustomPlotPlug-in\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="qcustomchart.h">
+      <Filter>CustomPlotPlug-in\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="qcustomplot.h">
+      <Filter>CustomPlotPlug-in\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="menumode.h">
+      <Filter>mode\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="paintmode.h">
+      <Filter>mode\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="custommode.h">
+      <Filter>mode\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="zoomcirclewait.h">
+      <Filter>ProcessBarPlug-in\Header Files</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="cwidgets.h">
+      <Filter>main\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="theme.h">
+      <Filter>main\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cursor.h">
+      <Filter>CanPool\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="qcanpool.h">
+      <Filter>CanPool\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="qcanpool_global.h">
+      <Filter>CanPool\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="screenhelper.h">
+      <Filter>CanPool\Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ctablewidget.cpp">
+      <Filter>main\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mainwindow.cpp">
+      <Filter>main\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="skindialog.cpp">
+      <Filter>main\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="theme.cpp">
+      <Filter>main\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>main\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="waitprogressbar.cpp">
+      <Filter>ProcessBarPlug-in\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stateprogressbar.cpp">
+      <Filter>ProcessBarPlug-in\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="qroundprogressbar.cpp">
+      <Filter>ProcessBarPlug-in\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="colorprogressbar.cpp">
+      <Filter>ProcessBarPlug-in\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dialplot.cpp">
+      <Filter>DialPlug-in\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dashboard.cpp">
+      <Filter>DialPlug-in\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="centralarea.cpp">
+      <Filter>CanPool\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cursor.cpp">
+      <Filter>CanPool\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fancybutton.cpp">
+      <Filter>CanPool\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fancydialog.cpp">
+      <Filter>CanPool\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fancynavbutton.cpp">
+      <Filter>CanPool\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fancytab.cpp">
+      <Filter>CanPool\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fancytabwidget.cpp">
+      <Filter>CanPool\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fancywindow.cpp">
+      <Filter>CanPool\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imode.cpp">
+      <Filter>CanPool\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imodebar.cpp">
+      <Filter>CanPool\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imodebutton.cpp">
+      <Filter>CanPool\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="minisplitter.cpp">
+      <Filter>CanPool\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pagesorter.cpp">
+      <Filter>CanPool\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="qcanpool.cpp">
+      <Filter>CanPool\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="screenhelper.cpp">
+      <Filter>CanPool\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="skinitem.cpp">
+      <Filter>CanPool\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fcustomplot.cpp">
+      <Filter>CustomPlotPlug-in\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="qcustomchart.cpp">
+      <Filter>CustomPlotPlug-in\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="qcustomplot.cpp">
+      <Filter>CustomPlotPlug-in\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="custommode.cpp">
+      <Filter>mode\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="menumode.cpp">
+      <Filter>mode\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="paintmode.cpp">
+      <Filter>mode\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="zoomcirclewait.cpp">
+      <Filter>ProcessBarPlug-in\Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
