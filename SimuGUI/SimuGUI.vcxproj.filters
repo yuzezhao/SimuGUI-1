@@ -238,6 +238,9 @@
     <QtMoc Include="zoomcirclewait.h">
       <Filter>ProcessBarPlug-in\Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="HLARunControl.h">
+      <Filter>mode\Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cwidgets.h">
@@ -361,6 +364,9 @@
     </ClCompile>
     <ClCompile Include="zoomcirclewait.cpp">
       <Filter>ProcessBarPlug-in\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HLARunControl.cpp">
+      <Filter>mode\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -38,6 +38,7 @@
 #include "custommode.h"
 #include "menumode.h"
 #include "paintmode.h"
+#include "HLARunControl.h"
 
 class MainWindow : public FancyWindow {
 
@@ -97,6 +98,8 @@ private:
 	CustomMode *m_pCustomMode;
 	PaintMode *m_pPaintMode;
 	MenuMode *m_pMenuMode;
+	HLARunControl *m_pHLARunControl;
+
 };
 
 #endif // MAINWINDOW_H

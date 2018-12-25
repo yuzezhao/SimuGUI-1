@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'SimuGUI.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.11.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -30,19 +30,19 @@ public:
     void setupUi(QMainWindow *SimuGUIClass)
     {
         if (SimuGUIClass->objectName().isEmpty())
-            SimuGUIClass->setObjectName(QString::fromUtf8("SimuGUIClass"));
+            SimuGUIClass->setObjectName(QStringLiteral("SimuGUIClass"));
         SimuGUIClass->resize(600, 400);
         menuBar = new QMenuBar(SimuGUIClass);
-        menuBar->setObjectName(QString::fromUtf8("menuBar"));
+        menuBar->setObjectName(QStringLiteral("menuBar"));
         SimuGUIClass->setMenuBar(menuBar);
         mainToolBar = new QToolBar(SimuGUIClass);
-        mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
+        mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
         SimuGUIClass->addToolBar(mainToolBar);
         centralWidget = new QWidget(SimuGUIClass);
-        centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
+        centralWidget->setObjectName(QStringLiteral("centralWidget"));
         SimuGUIClass->setCentralWidget(centralWidget);
         statusBar = new QStatusBar(SimuGUIClass);
-        statusBar->setObjectName(QString::fromUtf8("statusBar"));
+        statusBar->setObjectName(QStringLiteral("statusBar"));
         SimuGUIClass->setStatusBar(statusBar);
 
         retranslateUi(SimuGUIClass);

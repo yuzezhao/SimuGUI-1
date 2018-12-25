@@ -215,10 +215,12 @@ void MainWindow::createModeBar() {
 	m_pCustomMode = new CustomMode();
 	m_pPaintMode = new PaintMode();
 	m_pMenuMode = new MenuMode();
+	m_pHLARunControl = new HLARunControl();
 
 	m_modeManager->objectAdded(m_pCustomMode);
 	m_modeManager->objectAdded(m_pPaintMode);
 	m_modeManager->objectAdded(m_pMenuMode);
+	m_modeManager->objectAdded(m_pHLARunControl);
 
 	m_modeManager->setCurrentMode(m_pCustomMode);
 
