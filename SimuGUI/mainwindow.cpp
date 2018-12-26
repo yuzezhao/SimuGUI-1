@@ -222,7 +222,7 @@ void MainWindow::createModeBar() {
 	m_modeManager->objectAdded(m_pMenuMode);
 	m_modeManager->objectAdded(m_pHLARunControl);
 
-	m_modeManager->setCurrentMode(m_pCustomMode);
+	m_modeManager->setCurrentMode(m_pHLARunControl);
 
 	//QAction *action = new QAction(QIcon("./Icon/tools/start"), tr("Start"), this);
 	//action->setShortcut(tr("Ctrl+R"));

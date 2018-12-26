@@ -76,6 +76,18 @@
     <Filter Include="mode\Header Files">
       <UniqueIdentifier>{d9000051-62b2-4c94-b313-29288cd0965d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="HLA">
+      <UniqueIdentifier>{f57d7f78-d013-419d-85e1-8f041b54a6d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HLA\Header Files">
+      <UniqueIdentifier>{7b9e1ce7-66ae-4d13-a126-8cbb671b4aeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HLA\Source Files">
+      <UniqueIdentifier>{50e148dc-84df-44df-b8e9-43dbb49e04ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HLA\Config">
+      <UniqueIdentifier>{5377e96d-98c9-4ce9-a10f-df71957a8837}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="SimuGUI.ui">
@@ -241,6 +253,12 @@
     <QtMoc Include="HLARunControl.h">
       <Filter>mode\Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="HLAPortAdapter.h">
+      <Filter>HLA\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="HLAFlowThread.h">
+      <Filter>HLA\Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cwidgets.h">
@@ -260,6 +278,9 @@
     </ClInclude>
     <ClInclude Include="screenhelper.h">
       <Filter>CanPool\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachineCode.h">
+      <Filter>HLA\Config</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -367,6 +388,15 @@
     </ClCompile>
     <ClCompile Include="HLARunControl.cpp">
       <Filter>mode\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HLAPortAdapter.cpp">
+      <Filter>HLA\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HLAFlowThread.cpp">
+      <Filter>HLA\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Config.cpp">
+      <Filter>HLA\Config</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
