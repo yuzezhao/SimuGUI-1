@@ -1,4 +1,10 @@
 
+/*
+* 仿真控制GUI
+* @date : 2018/12/26
+* @author : jihang
+*/
+
 #include "HLARunControl.h"
 
 HLARunControl::HLARunControl(QWidget *parent) : IMode(parent) {
@@ -12,7 +18,8 @@ HLARunControl::HLARunControl(QWidget *parent) : IMode(parent) {
 	flowThread = new HLAFlowThread();
 	connect(flowThread, SIGNAL(FlowSignal(QString)), this, SLOT(DisplayFlow(QString)));
 	connect(flowThread, SIGNAL(StateSignal(int)), this, SLOT(DisplayState(int)));
-	connect(flowThread->getInstance(), SIGNAL(postUIMsg(int, QString)), this, SLOT(DisplayHLAState(int, QString)));
+	connect(flowThread->getInstance(), SIGNAL(postUIMsg(QString)), this, SLOT(DisplayHLAState(QString)));
+	connect(flowThread->getInstance(), SIGNAL(postUITime(double)), this, SLOT(DisplayHLATime(double)));
 }
 
 void HLARunControl::createWindow() {
@@ -24,7 +31,7 @@ void HLARunControl::createWindow() {
 	QFont font("Microsoft YaHei", 20, 75);
 	title->setFont(font);
 
-	QLCDNumber *lcdNumber = new QLCDNumber();
+	lcdNumber = new QLCDNumber();
 	lcdNumber->setSegmentStyle(QLCDNumber::Flat);
 	lcdNumber->setFixedWidth(200);
 
@@ -36,12 +43,16 @@ void HLARunControl::createWindow() {
 	connect(prepare, SIGNAL(clicked()), this, SLOT(prepare()));
 	FancyButton *ready = new FancyButton();
 	ready = addFunctionButton(ready, "ready");
+	connect(ready, SIGNAL(clicked()), this, SLOT(ready()));
 	FancyButton *stop = new FancyButton();
 	stop = addFunctionButton(stop, "stop");
+	connect(stop, SIGNAL(clicked()), this, SLOT(stop()));
 	FancyButton *start = new FancyButton();
 	start = addFunctionButton(start, "start");
+	connect(start, SIGNAL(clicked()), this, SLOT(start()));
 	FancyButton *pause = new FancyButton();
 	pause = addFunctionButton(pause, "pause");
+	connect(pause, SIGNAL(clicked()), this, SLOT(pause()));
 	QGridLayout *buttonLayout = new QGridLayout();
 	buttonLayout->addWidget(prepare, 0, 0, 1, 1);
 	buttonLayout->addWidget(ready, 0, 1, 1, 1);
@@ -108,7 +119,7 @@ FancyButton* HLARunControl::addFunctionButton(FancyButton* button, QString name)
 }
 
 void HLARunControl::DisplayFlow(QString msg) {
-	info->append(msg);
+	info->append("#FlowThread#" + msg);
 }
 
 void HLARunControl::DisplayState(int state) {
@@ -135,8 +146,12 @@ void HLARunControl::DisplayState(int state) {
 	}
 }
 
-void HLARunControl::DisplayHLAState(int a, QString s) {
-	info->append(s);
+void HLARunControl::DisplayHLAState(QString msg) {
+	info->append("#PortAdapter#" + msg);
+}
+
+void HLARunControl::DisplayHLATime(double time) {
+	lcdNumber->display(time);
 }
 
 void HLARunControl::prepare() {
@@ -154,4 +169,50 @@ void HLARunControl::prepare() {
 	}
 	info->append(ir->getMessage().c_str());
 	flowThread->start();
+}
+
+void HLARunControl::ready() {
+	//判断流程状态
+	if (flowThread->getState() != StateMachineCode::getRegisPointCode()) {
+		QMessageBox::warning(NULL, "Warning", "WRONG CLICK!!!");
+		return;
+	}
+	info->append("please wait for others patiently...");
+	flowThread->start();
+}
+
+void HLARunControl::start() {
+	if (flowThread->getState() == StateMachineCode::getRegisteredCode()) {
+		flowThread->start();
+	}
+	else if (flowThread->getState() == StateMachineCode::getRunningCode()) {
+		if (flowThread->getInstance()->isPause) {
+			flowThread->getInstance()->isPause = false;
+			putImage("8", stateLabel);
+		}
+	}
+	else {
+		QMessageBox::warning(NULL, "Warning", "WRONG CLICK!!!");
+	}
+}
+
+void HLARunControl::pause() {
+	//判断流程状态
+	if (flowThread->getState() != StateMachineCode::getRunningCode()) {
+		QMessageBox::warning(NULL, "Warning", "Simulation Not Run!!!");
+		return;
+	}
+	flowThread->getInstance()->isPause = true;
+	putImage("9", stateLabel);
+}
+
+void HLARunControl::end() {
+	//TODO：点END卡住就退了
+	//判断流程状态
+	if (flowThread->getState() != StateMachineCode::getRunningCode()) {
+		QMessageBox::warning(NULL, "Warning", "WRONG CLICK!!!");
+		return;
+	}
+	flowThread->getInstance()->isEnd = true;
+	putImage("10", stateLabel);
 }

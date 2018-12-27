@@ -65,5 +65,7 @@ public:
 
 signals:
 	//发给UI的信号
-	void postUIMsg(int, QString);
+	void postUIMsg(QString);
+	//发给UI的时间
+	void postUITime(double);
 };

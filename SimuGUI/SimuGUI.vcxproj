@@ -142,7 +142,6 @@
     <ClInclude Include="qcanpool.h" />
     <ClInclude Include="qcanpool_global.h" />
     <ClInclude Include="screenhelper.h" />
-    <ClInclude Include="StateMachineCode.h" />
     <ClInclude Include="theme.h" />
     <QtMoc Include="zoomcirclewait.h" />
     <QtMoc Include="waitprogressbar.h" />

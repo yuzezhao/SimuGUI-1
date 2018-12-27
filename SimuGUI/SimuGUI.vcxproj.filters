@@ -279,9 +279,6 @@
     <ClInclude Include="screenhelper.h">
       <Filter>CanPool\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="StateMachineCode.h">
-      <Filter>HLA\Config</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ctablewidget.cpp">
