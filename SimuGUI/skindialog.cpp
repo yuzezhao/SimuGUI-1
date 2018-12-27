@@ -9,7 +9,7 @@
 
 #define SKIN_NUM 15
 #define SKIN_RES_NAME(n)   QString("./Icon/skin/%1").arg(n)
-#define THEME_PATH QString("./theme")
+#define THEME_PATH QString("./Icon/theme")
 
 SkinDialog::SkinDialog(QWidget *parent) : FancyDialog(parent) {
 

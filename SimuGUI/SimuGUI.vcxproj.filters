@@ -88,6 +88,15 @@
     <Filter Include="HLA\Config">
       <UniqueIdentifier>{5377e96d-98c9-4ce9-a10f-df71957a8837}</UniqueIdentifier>
     </Filter>
+    <Filter Include="FMI">
+      <UniqueIdentifier>{4cf8d3ed-9b62-4c50-867d-b9ee98656ba4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FMI\Header Files">
+      <UniqueIdentifier>{73afe75b-51b5-4094-af14-76701534916d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FMI\Source Files">
+      <UniqueIdentifier>{a5eb8b7b-5dfb-4c3d-b581-4fee29bf5a03}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="SimuGUI.ui">
@@ -259,6 +268,9 @@
     <QtMoc Include="HLAFlowThread.h">
       <Filter>HLA\Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="FMISimulator.h">
+      <Filter>mode\Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cwidgets.h">
@@ -278,6 +290,9 @@
     </ClInclude>
     <ClInclude Include="screenhelper.h">
       <Filter>CanPool\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FMISupport.h">
+      <Filter>FMI\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -394,6 +409,12 @@
     </ClCompile>
     <ClCompile Include="Config.cpp">
       <Filter>HLA\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="FMISimulator.cpp">
+      <Filter>mode\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FMISupport.cpp">
+      <Filter>FMI\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

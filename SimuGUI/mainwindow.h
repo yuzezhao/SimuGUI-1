@@ -39,6 +39,7 @@
 #include "menumode.h"
 #include "paintmode.h"
 #include "HLARunControl.h"
+#include "FMISimulator.h"
 
 class MainWindow : public FancyWindow {
 
@@ -99,7 +100,7 @@ private:
 	PaintMode *m_pPaintMode;
 	MenuMode *m_pMenuMode;
 	HLARunControl *m_pHLARunControl;
-
+	FMISimulator *m_pFMISimulator;
 };
 
 #endif // MAINWINDOW_H

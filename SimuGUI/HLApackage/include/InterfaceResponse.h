@@ -66,6 +66,6 @@ public:
 	//	return new InterfaceResponse(true);
 	//}
 	static InterfaceResponse* createByErrorMessage(string msg) {
-		return new InterfaceResponse(true, msg);
+		return new InterfaceResponse(false, msg);
 	}
 };
