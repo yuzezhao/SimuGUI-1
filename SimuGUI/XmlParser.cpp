@@ -109,7 +109,8 @@ ModelDescription *XmlParser::parse() {
             logThis(ERROR_FATAL, "Out of memory");
             md = NULL;
         }
-        xmlFreeTextReader(xmlReader);
+		//by jh
+        //xmlFreeTextReader(xmlReader);
     } else {
         logThis(ERROR_ERROR, "Unable to open '%s'", xmlPath);
     }

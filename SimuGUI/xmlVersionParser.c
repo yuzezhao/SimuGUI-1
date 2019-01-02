@@ -67,7 +67,8 @@ static char *streamFile(const char *xmlPath) {
         } else {
             logThis(ERROR_ERROR, "Syntax error parsing xml file '%s'", xmlPath);
         }
-        xmlFreeTextReader(xmlReader);
+		//edit by jh
+        //xmlFreeTextReader(xmlReader);
     } else {
         logThis(ERROR_ERROR, "Cannot open file '%s'", xmlPath);
     }

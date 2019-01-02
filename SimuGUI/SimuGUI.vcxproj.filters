@@ -416,5 +416,17 @@
     <ClCompile Include="FMISupport.cpp">
       <Filter>FMI\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="xmlVersionParser.c">
+      <Filter>FMI</Filter>
+    </ClCompile>
+    <ClCompile Include="XmlParserCApi.cpp">
+      <Filter>FMI</Filter>
+    </ClCompile>
+    <ClCompile Include="XmlParser.cpp">
+      <Filter>FMI</Filter>
+    </ClCompile>
+    <ClCompile Include="XmlElement.cpp">
+      <Filter>FMI</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
