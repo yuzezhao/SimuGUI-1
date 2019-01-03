@@ -266,6 +266,9 @@
     <QtMoc Include="Plugin-ProcessBar\Header Files\zoomcirclewait.h">
       <Filter>Plugin-ProcessBar\Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="FMI\Header Files\FMISupport.h">
+      <Filter>FMI\Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CanPool\Header Files\cursor.h">
@@ -279,9 +282,6 @@
     </ClInclude>
     <ClInclude Include="CanPool\Header Files\screenhelper.h">
       <Filter>CanPool\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FMI\Header Files\FMISupport.h">
-      <Filter>FMI\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="main\Header Files\cwidgets.h">
       <Filter>main\Header Files</Filter>

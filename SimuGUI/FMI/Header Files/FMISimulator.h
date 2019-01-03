@@ -23,10 +23,11 @@ signals:
 
 public slots:
 	void test();
+	void DisplayFMIMsg(QString);
 
 private:
 	void createWindow();
 
-	QTextBrowser *t;
+	QTextBrowser *textBrowser;
 };
 #endif // FMISIMULATOR_H

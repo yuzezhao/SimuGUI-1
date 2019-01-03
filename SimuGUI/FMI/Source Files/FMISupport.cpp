@@ -8,17 +8,18 @@
 #endif
 
 #include <sstream>
+#include <string>
 
 #include "FMISupport.h"
 #include "xmlVersionParser.h"
 
 #define DIRECTORY_PATH_SIZE 1024
 static char currentDirectory[DIRECTORY_PATH_SIZE];
-#define UNZIP_CMD ".\\FMIpackage\\7z\\7z x -aoa -o"
+#define UNZIP_CMD ".\\FMI\\7z\\7z x -aoa -o"
 // -x   Extracts files from an archive with their full paths in the current dir, or in an output dir if specified
 // -aoa Overwrite All existing files without prompt
 // -o   Specifies a destination directory where files are to be extracted
-#define OUT_PATH "\\FMIpackage\\tmp\\"
+#define OUT_PATH "\\FMI\\tmp\\"
 
 #define SEVEN_ZIP_NO_ERROR 0
 #define SEVEN_ZIP_WARNING 1
@@ -33,8 +34,12 @@ static char currentDirectory[DIRECTORY_PATH_SIZE];
 #define DLL_DIR   "binaries\\win32\\"
 #endif
 
-InterfaceResponse<bool>* FMISupport::loadFMU(const char *filePath, int simuType) {
-	string resultMsg;
+using namespace std;
+
+FMISupport::FMISupport(QObject *parent) : QObject(parent) {
+}
+
+bool FMISupport::loadFMU(const char *filePath, int simuType) {
 	type = simuType;
 
 	//获取当前目录
@@ -49,14 +54,13 @@ InterfaceResponse<bool>* FMISupport::loadFMU(const char *filePath, int simuType)
 	int code = system(str.c_str());
 	switch (code) {
 	case SEVEN_ZIP_NO_ERROR: break;
-	case SEVEN_ZIP_WARNING: return InterfaceResponse<bool>::createByErrorMessage("warning");
-	case SEVEN_ZIP_ERROR: return InterfaceResponse<bool>::createByErrorMessage("error");
-	case SEVEN_ZIP_COMMAND_LINE_ERROR: return InterfaceResponse<bool>::createByErrorMessage("command line error");
-	case SEVEN_ZIP_OUT_OF_MEMORY: return InterfaceResponse<bool>::createByErrorMessage("out of memory");
-	case SEVEN_ZIP_STOPPED_BY_USER: return InterfaceResponse<bool>::createByErrorMessage("stopped by user");
-	default: return InterfaceResponse<bool>::createByErrorMessage("unknown problem");
+	case SEVEN_ZIP_WARNING: emit postUIMsg("warning"); return false;
+	case SEVEN_ZIP_ERROR: emit postUIMsg("error"); return false;
+	case SEVEN_ZIP_COMMAND_LINE_ERROR: emit postUIMsg("command line error"); return false;
+	case SEVEN_ZIP_OUT_OF_MEMORY: emit postUIMsg("out of memory"); return false;
+	case SEVEN_ZIP_STOPPED_BY_USER: emit postUIMsg("stopped by user"); return false;
+	default: emit postUIMsg("unknown problem"); return false;
 	}
-	//resultMsg += "unzip success!\n";
 
 	//判断版本是否符合要求
 	ss.clear();
@@ -68,12 +72,13 @@ InterfaceResponse<bool>* FMISupport::loadFMU(const char *filePath, int simuType)
 	char *xmlFmiVersion = extractVersion(str.c_str());
 
 	if (xmlFmiVersion == NULL) {
-		return InterfaceResponse<bool>::createByErrorMessage("The FMI version of the FMU could not be read");
+		emit postUIMsg("The FMI version of the FMU could not be read");
+		return false;
 	}
 	if (strcmp(xmlFmiVersion, fmi2Version) != 0) {
-		return InterfaceResponse<bool>::createByErrorMessage("The FMI version wrong");
+		emit postUIMsg("The FMI version wrong");
+		return false;
 	}
-	//resultMsg += "version check success!\n";
 
 	//提取模型描述并输出
 	char* xmlPath = new char[str.length() + 1];
@@ -87,33 +92,44 @@ InterfaceResponse<bool>* FMISupport::loadFMU(const char *filePath, int simuType)
 	int n;
 	const char **attributes = getAttributesAsArray(e, &n);
 	if (!attributes) {
-		return InterfaceResponse<bool>::createByErrorMessage("ModelDescription printing aborted.");
+		emit postUIMsg("ModelDescription printing aborted.");
+		return false;
 	}
-	resultMsg = resultMsg + getElementTypeName(e) + "\n";
+	emit postUIMsg(getElementTypeName(e));
 	for (int i = 0; i < n; i += 2) {
-		resultMsg = resultMsg + attributes[i] + " = " + attributes[i + 1] + "\n";
+		QString s1 = attributes[i];
+		QString s2 = " = ";
+		QString s3 = attributes[i + 1];
+		emit postUIMsg(s1 + s2 + s3);
 	}
+	Component *component;
 	if (type == FMI_MODEL_EXCHANGE) {
 		component = getModelExchange(fmu.modelDescription);
 		if (!component) {
-			return InterfaceResponse<bool>::createByErrorMessage(
+			emit postUIMsg(
 				"error: No ModelExchange element found in model description. This FMU is not for Model Exchange.");
+			return false;
 		}
 	}
 	else if (type == FMI_COSIMULATION) {
 		component = getCoSimulation(fmu.modelDescription);
 		if (!component) {
-			return InterfaceResponse<bool>::createByErrorMessage(
+			emit postUIMsg(
 				"error: No CoSimulation element found in model description. This FMU is not for Co-Simulation.");
+			return false;
 		}
 	}
-	resultMsg = resultMsg + getElementTypeName((Element*)component) + "\n";
+	emit postUIMsg(getElementTypeName((Element*)component));
 	attributes = getAttributesAsArray((Element *)component, &n);
 	if (!attributes) {
-		return InterfaceResponse<bool>::createByErrorMessage("ModelDescription printing aborted 2.");
+		emit postUIMsg("ModelDescription printing aborted 2.");
+		return false;
 	}
 	for (int i = 0; i < n; i += 2) {
-		resultMsg = resultMsg + attributes[i] + " = " + attributes[i + 1] + "\n";
+		QString s1 = attributes[i];
+		QString s2 = " = ";
+		QString s3 = attributes[i + 1];
+		emit postUIMsg(s1 + s2 + s3);
 	}
 	//获取modelID
 	const char *modelId;
@@ -131,9 +147,10 @@ InterfaceResponse<bool>* FMISupport::loadFMU(const char *filePath, int simuType)
 	str = ss.str();
 
 	if (!loadDll(str.c_str())) {
-		return InterfaceResponse<bool>::createByErrorMessage("load dll error");
+		emit postUIMsg("load dll error");
+		return false;
 	}
-	return InterfaceResponse<bool>::createBySuccessMessage(resultMsg);
+	return true;
 }
 
 bool FMISupport::loadDll(const char* dllPath) {
@@ -269,16 +286,12 @@ void FMISupport::unLoad() {
 	system(str.c_str());
 }
 
-InterfaceResponse<bool>* FMISupport::simulateByCs(
+bool FMISupport::simulateByCs(
 	double tStart,
 	double tEnd,
 	double h,
-	fmi2Boolean loggingOn,
-	char separator,
 	int nCategories,
 	char **categories) {
-
-	string resultMsg = "hello";
 	ModelDescription* md = fmu.modelDescription;
 	//获取信息
 	const char* guid = getAttributeValue((Element*)md, att_guid);
@@ -292,21 +305,23 @@ InterfaceResponse<bool>* FMISupport::simulateByCs(
 
 	//回调
 	fmi2CallbackFunctions callbacks = { fmuLogger, calloc, free, NULL, &fmu };
-	
 
 	//是否有可视化组件
 	fmi2Boolean visible = fmi2False;
 
-	fmi2Component c = fmu.instantiate(instanceName, fmi2CoSimulation, guid, str.c_str(), &callbacks, visible, loggingOn);
+	//最后一项为loggingOn
+	c = fmu.instantiate(instanceName, fmi2CoSimulation, guid, str.c_str(), &callbacks, visible, true);
 
 	if (!c) {
-		return InterfaceResponse<bool>::createByErrorMessage("could not instantiate model");
+		emit postUIMsg("could not instantiate model");
+		return false;
 	}
-	
+
 	if (nCategories > 0) {
 		fmi2Status fmi2Flag = fmu.setDebugLogging(c, fmi2True, nCategories, categories);
 		if (fmi2Flag > fmi2Warning) {
-			return InterfaceResponse<bool>::createByErrorMessage("failed FMI set debug logging");
+			emit postUIMsg("failed FMI set debug logging");
+			return false;
 		}
 	}
 
@@ -324,21 +339,31 @@ InterfaceResponse<bool>* FMISupport::simulateByCs(
 
 	fmi2Status fmi2Flag = fmu.setupExperiment(c, toleranceDefined, tolerance, tStart, fmi2True, tEnd);
 	if (fmi2Flag > fmi2Warning) {
-		return InterfaceResponse<bool>::createByErrorMessage("failed FMI setup experiment");
+		emit postUIMsg("failed FMI setup experiment");
+		return false;
 	}
 
 	fmi2Flag = fmu.enterInitializationMode(c);
 	if (fmi2Flag > fmi2Warning) {
-		return InterfaceResponse<bool>::createByErrorMessage("failed FMI enter initialization mode");
+		emit postUIMsg("failed FMI enter initialization mode");
+		return false;
 	}
 
 	fmi2Flag = fmu.exitInitializationMode(c);
 	if (fmi2Flag > fmi2Warning) {
-		return InterfaceResponse<bool>::createByErrorMessage("failed FMI exit initialization mode");
+		emit postUIMsg("failed FMI exit initialization mode");
+		return false;
 	}
 
-	//TODO
+	QString ss1 = ".\\logs\\";
+	QString ss2 = instanceName;
+	QString ss3 = ".csv";
+	QString s = ss1 + ss2 + ss3;
 
+	ofstream dataFile(s.toStdString().data());
+
+	outputData(dataFile, tStart, true);
+	outputData(dataFile, tStart, false);
 
 	int nSteps = 0;
 	double hh = h;
@@ -352,30 +377,113 @@ InterfaceResponse<bool>* FMISupport::simulateByCs(
 		if (fmi2Flag == fmi2Discard) {
 			fmi2Boolean b;
 			if (fmi2OK != fmu.getBooleanStatus(c, fmi2Terminated, &b)) {
-				return InterfaceResponse<bool>::createByErrorMessage(
+				emit postUIMsg(
 					"could not complete simulation of the model. getBooleanStatus return other than fmi2OK");
+				return false;
 			}
 			if (b == fmi2True) {
-				return InterfaceResponse<bool>::createByErrorMessage("the model requested to end the simulation");
+				emit postUIMsg("the model requested to end the simulation");
+				return false;
 			}
-			return InterfaceResponse<bool>::createByErrorMessage("could not complete simulation of the model 1");
+			emit postUIMsg("could not complete simulation of the model 1");
+			return false;
 		}
 		if (fmi2Flag != fmi2OK) {
-			return InterfaceResponse<bool>::createByErrorMessage("could not complete simulation of the model 2");
+			emit postUIMsg("could not complete simulation of the model 2");
+			return false;
 		}
 		time += hh;
-		//outputRow(fmu, c, time, file, separator, fmi2False);
+		outputData(dataFile, time, false);
 		//计步
 		nSteps++;
 	}
 
 	fmu.terminate(c);
 	fmu.freeInstance(c);
-	
 
-	return InterfaceResponse<bool>::createBySuccessMessage(resultMsg);
+	QString s1 = "Simulation from ";
+	QString s2 = QString::number(tStart);
+	QString s3 = " to ";
+	QString s4 = QString::number(tEnd);;
+	emit postUIMsg(s1 + s2 + s3 + s4);
+
+	QString s5 = "steps ............ ";
+	QString s6 = QString::number(nSteps);
+	emit postUIMsg(s5 + s6);
+
+	QString s7 = "fixed step size .. ";
+	QString s8 = QString::number(h);
+	emit postUIMsg(s7 + s8);
+
+	return true;
 }
 
+bool FMISupport::simulateByMe(
+	double tStart,
+	double tEnd,
+	double h,
+	int nCategories,
+	char **categories) {
+
+}
+
+void FMISupport::outputData(ofstream& file, double time, bool isHeader) {
+
+	if (isHeader) {
+		file << "time";
+	}
+	else {
+		file << time;
+	}
+	for (int k = 0; k < getScalarVariableSize(fmu.modelDescription); ++k) {
+		ScalarVariable *sv = getScalarVariable(fmu.modelDescription, k);
+		if (isHeader) {
+			const char *s = getAttributeValue((Element*)sv, att_name);
+			file << ",";
+			while (*s) {
+				//忽略空格和逗号
+				if (*s != ' ') {
+					file << (*s == ',' ? '.' : *s);
+				}
+				s++;
+			}
+		}
+		else {
+			fmi2ValueReference vr = getValueReference(sv);
+			switch (getElementType(getTypeSpec(sv))) {
+			case elm_Real:
+				fmi2Real r;
+				fmu.getReal(c, &vr, 1, &r);
+				file << "," << r;
+				break;
+			case elm_Integer:
+			case elm_Enumeration:
+				fmi2Integer i;
+				fmu.getInteger(c, &vr, 1, &i);
+				file << "," << i;
+				break;
+			case elm_Boolean:
+				fmi2Boolean b;
+				fmu.getBoolean(c, &vr, 1, &b);
+				file << "," << b;
+				break;
+			case elm_String:
+				fmi2String s;
+				fmu.getString(c, &vr, 1, &s);
+				file << "," << s;
+				break;
+			default:
+				file << ",NoValueForType=" << getElementType(getTypeSpec(sv));
+			}
+		}
+	}
+	file << endl;
+}
+
+
+
+/**************************************************************/
+ofstream logFile(".\\logs\\FMI.log");
 #define MAX_MSG_SIZE 1000
 void fmuLogger(
 	void *componentEnvironment,
@@ -402,7 +510,15 @@ void fmuLogger(
 	// print the final message
 	if (!instanceName) instanceName = "?";
 	if (!category) category = "?";
-	printf("%s %s (%s): %s\n", fmi2StatusToString(status), instanceName, category, msg);
+
+	logFile << fmi2StatusToString(status)
+		<< "  "
+		<< instanceName
+		<< "("
+		<< category
+		<< "):"
+		<< msg
+		<< endl;
 }
 // replace e.g. #r1365# by variable name and ## by # in message
 // copies the result to buffer
@@ -427,7 +543,10 @@ void replaceRefsInMessage(const char* msg, char* buffer, int nBuffer, FMU* fmu) 
 		else {
 			char* end = (char*)strchr(msg + i + 1, '#');
 			if (!end) {
-				printf("unmatched '#' in '%s'\n", msg);
+				logFile << "<error>unmatched '#' in '"
+					<< msg
+					<< "'"
+					<< endl;
 				buffer[k++] = '#';
 				break;
 			}
@@ -455,7 +574,12 @@ void replaceRefsInMessage(const char* msg, char* buffer, int nBuffer, FMU* fmu) 
 				}
 				else {
 					// could not parse the number
-					printf("illegal value reference at position %d in '%s'\n", i + 2, msg);
+					logFile << "<error>illegal value reference at position "
+						<< i + 2
+						<< " in '"
+						<< msg
+						<< "'"
+						<< endl;
 					buffer[k++] = '#';
 					break;
 				}
@@ -493,12 +617,7 @@ const char* fmi2StatusToString(fmi2Status status) {
 	case fmi2Discard: return "discard";
 	case fmi2Error:   return "error";
 	case fmi2Fatal:   return "fatal";
-	case fmi2Pending:
-	{
-		//if (type == FMI_COSIMULATION) {
-			return "fmi2Pending";
-		//}
-	}
+	case fmi2Pending: return "fmi2PendingIFCS";
 	default:         return "?";
 	}
 }

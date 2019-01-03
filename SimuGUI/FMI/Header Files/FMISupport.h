@@ -1,30 +1,42 @@
 #pragma once
 
-#include "fmi2.h"
+#include <QObject>
+#include <fstream>
 
-#include "InterfaceResponse.h"
+#include "fmi2.h"
 
 #define FMI_MODEL_EXCHANGE 1
 #define FMI_COSIMULATION 2
 
-class FMISupport {
+using namespace std;
+
+class FMISupport : public QObject {
+
+	Q_OBJECT
 
 public:
-	InterfaceResponse<bool>* loadFMU(const char*, int);
+	explicit FMISupport(QObject *parent = NULL);
+	virtual ~FMISupport() {};
+
+public:
+	bool loadFMU(const char*, int);
 	void unLoad();
-	InterfaceResponse<bool>* simulateByCs(double, double, double, fmi2Boolean, char, int, char **);
+	bool simulateByCs(double, double, double, int, char **);
+	bool simulateByMe(double, double, double, int, char **);
 
 private:
 	bool loadDll(const char*);
 	void *getAdr(bool*, HMODULE, const char*);
-
-public:
-	FMU fmu;
-	int type;
-	Component *component;
+	void outputData(ofstream&, double, bool);
 
 private:
 	char* currentDir;
+	FMU fmu;
+	int type;
+	fmi2Component c;
+
+signals:
+	void postUIMsg(QString);
 };
 
 void fmuLogger(void*, fmi2String, fmi2Status, fmi2String, fmi2String, ...);
