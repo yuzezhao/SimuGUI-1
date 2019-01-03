@@ -114,6 +114,7 @@ FancyButton* HLARunControl::addFunctionButton(FancyButton* button, QString name)
 	button->setTextColor(Qt::black);
 	button->setFont(font);
 	button->setText(name);
+	button->setNormalColor(Qt::gray);
 	button->setHoverColor(Qt::green);
 	return button;
 }

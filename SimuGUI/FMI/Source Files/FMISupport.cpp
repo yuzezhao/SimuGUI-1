@@ -291,8 +291,8 @@ InterfaceResponse<bool>* FMISupport::simulateByCs(
 	str = ss.str();
 
 	//回调
-	//fmi2CallbackFunctions callbacks = { this->fmuLogger, calloc, free, NULL, &fmu };
-	/*
+	fmi2CallbackFunctions callbacks = { fmuLogger, calloc, free, NULL, &fmu };
+	
 
 	//是否有可视化组件
 	fmi2Boolean visible = fmi2False;
@@ -302,7 +302,7 @@ InterfaceResponse<bool>* FMISupport::simulateByCs(
 	if (!c) {
 		return InterfaceResponse<bool>::createByErrorMessage("could not instantiate model");
 	}
-
+	
 	if (nCategories > 0) {
 		fmi2Status fmi2Flag = fmu.setDebugLogging(c, fmi2True, nCategories, categories);
 		if (fmi2Flag > fmi2Warning) {
@@ -371,13 +371,13 @@ InterfaceResponse<bool>* FMISupport::simulateByCs(
 
 	fmu.terminate(c);
 	fmu.freeInstance(c);
-	*/
+	
 
 	return InterfaceResponse<bool>::createBySuccessMessage(resultMsg);
 }
 
 #define MAX_MSG_SIZE 1000
-void FMISupport::fmuLogger(
+void fmuLogger(
 	void *componentEnvironment,
 	fmi2String instanceName,
 	fmi2Status status,
@@ -396,7 +396,7 @@ void FMISupport::fmuLogger(
 
 	// replace e.g. ## and #r12#
 	copy = strdup(msg);
-	replaceRefsInMessage(copy, msg, MAX_MSG_SIZE, &fmu);
+	replaceRefsInMessage(copy, msg, MAX_MSG_SIZE, (FMU*)componentEnvironment);
 	free(copy);
 
 	// print the final message
@@ -406,7 +406,7 @@ void FMISupport::fmuLogger(
 }
 // replace e.g. #r1365# by variable name and ## by # in message
 // copies the result to buffer
-void FMISupport::replaceRefsInMessage(const char* msg, char* buffer, int nBuffer, FMU* fmu) {
+void replaceRefsInMessage(const char* msg, char* buffer, int nBuffer, FMU* fmu) {
 	int i = 0; // position in msg
 	int k = 0; // position in buffer
 	int n;
@@ -466,7 +466,7 @@ void FMISupport::replaceRefsInMessage(const char* msg, char* buffer, int nBuffer
 }
 // search a fmu for the given variable, matching the type specified.
 // return NULL if not found
-ScalarVariable* FMISupport::getSV(FMU* fmu, char type, fmi2ValueReference vr) {
+ScalarVariable* getSV(FMU* fmu, char type, fmi2ValueReference vr) {
 	int i;
 	int n = getScalarVariableSize(fmu->modelDescription);
 	Elm tp;
@@ -486,7 +486,7 @@ ScalarVariable* FMISupport::getSV(FMU* fmu, char type, fmi2ValueReference vr) {
 	}
 	return NULL;
 }
-const char* FMISupport::fmi2StatusToString(fmi2Status status) {
+const char* fmi2StatusToString(fmi2Status status) {
 	switch (status) {
 	case fmi2OK:      return "ok";
 	case fmi2Warning: return "warning";
@@ -495,9 +495,9 @@ const char* FMISupport::fmi2StatusToString(fmi2Status status) {
 	case fmi2Fatal:   return "fatal";
 	case fmi2Pending:
 	{
-		if (type == FMI_COSIMULATION) {
+		//if (type == FMI_COSIMULATION) {
 			return "fmi2Pending";
-		}
+		//}
 	}
 	default:         return "?";
 	}

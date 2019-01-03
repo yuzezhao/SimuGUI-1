@@ -25,11 +25,9 @@ public:
 
 private:
 	char* currentDir;
-
-private:
-	void fmuLogger(void*, fmi2String, fmi2Status, fmi2String, fmi2String, ...);
-	void replaceRefsInMessage(const char*, char*, int, FMU*);
-	ScalarVariable* getSV(FMU*, char, fmi2ValueReference);
-	const char* fmi2StatusToString(fmi2Status);
 };
 
+void fmuLogger(void*, fmi2String, fmi2Status, fmi2String, fmi2String, ...);
+void replaceRefsInMessage(const char*, char*, int, FMU*);
+ScalarVariable* getSV(FMU*, char, fmi2ValueReference);
+const char* fmi2StatusToString(fmi2Status);

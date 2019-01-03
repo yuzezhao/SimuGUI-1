@@ -40,7 +40,7 @@ void FMISimulator::createWindow() {
 void FMISimulator::test() {
 	FMISupport *f = new FMISupport();
 	t->append(f->loadFMU("D:\\bouncingBall.fmu", FMI_COSIMULATION)->getMessage().c_str());
-	t->append(f->simulateByCs(0.0, 30.0, 0.1, false, ',', 0, NULL)->getMessage().c_str());
+	t->append(f->simulateByCs(0.0, 30.0, 0.1, true, ',', 0, NULL)->getMessage().c_str());
 	//f->unLoad();
 }
 

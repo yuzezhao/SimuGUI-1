@@ -54,7 +54,7 @@
     <ClCompile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PreprocessorDefinitions>WIN32;WIN64;QT_DLL;QT_3DCORE_LIB;QT_3DANIMATION_LIB;QT_3DEXTRAS_LIB;QT_3DINPUT_LIB;QT_3DLOGIC_LIB;QT_3DRENDER_LIB;QT_CHARTS_LIB;QT_CORE_LIB;QT_DATAVISUALIZATION_LIB;QT_GUI_LIB;QT_MULTIMEDIA_LIB;QT_MULTIMEDIAWIDGETS_LIB;QT_NETWORK_LIB;QT_OPENGL_LIB;QT_OPENGLEXTENSIONS_LIB;QT_PRINTSUPPORT_LIB;QT_QUICK_LIB;QT_QUICKWIDGETS_LIB;QT_SQL_LIB;QT_UITOOLS_LIB;QT_WIDGETS_LIB;QT_XML_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.\FMIpackage\include;.\HLApackage\include;.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\Qt3DCore;$(QTDIR)\include\Qt3DAnimation;$(QTDIR)\include\Qt3DExtras;$(QTDIR)\include\Qt3DInput;$(QTDIR)\include\Qt3DLogic;$(QTDIR)\include\Qt3DRender;$(QTDIR)\include\QtCharts;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtDataVisualization;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtMultimedia;$(QTDIR)\include\QtMultimediaWidgets;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtOpenGL;$(QTDIR)\include\QtOpenGLExtensions;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtQuick;$(QTDIR)\include\QtQuickWidgets;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtUiTools;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtXml;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\Plugin-ProcessBar\Header Files;.\Plugin-Dial\Header Files;.\Plugin-CustomPlot\Header Files;.\main\Header Files;.\HLA\include;.\HLA\Header Files;.\FMI\include;.\FMI\Header Files;.\ExampleMode\Header Files;.\CanPool\Header Files;.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\Qt3DCore;$(QTDIR)\include\Qt3DAnimation;$(QTDIR)\include\Qt3DExtras;$(QTDIR)\include\Qt3DInput;$(QTDIR)\include\Qt3DLogic;$(QTDIR)\include\Qt3DRender;$(QTDIR)\include\QtCharts;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtDataVisualization;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtMultimedia;$(QTDIR)\include\QtMultimediaWidgets;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtOpenGL;$(QTDIR)\include\QtOpenGLExtensions;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtQuick;$(QTDIR)\include\QtQuickWidgets;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtUiTools;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtXml;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -63,7 +63,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
-      <AdditionalLibraryDirectories>.\FMIpackage\lib;.\HLApackage\lib;$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>.\FMI\lib;.\HLA\lib;$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>libxml2.lib;HLAPortInterface.lib;libFedTime_64d.lib;libRTI-NG_64d.lib;qtmaind.lib;Qt53DCored.lib;Qt53DAnimationd.lib;Qt53DExtrasd.lib;Qt53DInputd.lib;Qt53DLogicd.lib;Qt53DRenderd.lib;Qt5Chartsd.lib;Qt5Cored.lib;Qt5DataVisualizationd.lib;Qt5Guid.lib;Qt5Multimediad.lib;Qt5MultimediaWidgetsd.lib;Qt5Networkd.lib;Qt5OpenGLd.lib;opengl32.lib;glu32.lib;Qt5OpenGLExtensionsd.lib;Qt5PrintSupportd.lib;Qt5Quickd.lib;Qt5QuickWidgetsd.lib;Qt5Sqld.lib;Qt5UiToolsd.lib;Qt5Widgetsd.lib;Qt5Xmld.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
@@ -71,8 +71,8 @@
     <QtMoc>
       <OutputFile>.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
       <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
-      <IncludePath>.\FMIpackage\include;.\HLApackage\include;.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\Qt3DCore;$(QTDIR)\include\Qt3DAnimation;$(QTDIR)\include\Qt3DExtras;$(QTDIR)\include\Qt3DInput;$(QTDIR)\include\Qt3DLogic;$(QTDIR)\include\Qt3DRender;$(QTDIR)\include\QtCharts;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtDataVisualization;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtMultimedia;$(QTDIR)\include\QtMultimediaWidgets;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtOpenGL;$(QTDIR)\include\QtOpenGLExtensions;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtQuick;$(QTDIR)\include\QtQuickWidgets;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtUiTools;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtXml;%(AdditionalIncludeDirectories)</IncludePath>
-      <Define>WIN32;WIN64;QT_DLL;QT_3DCORE_LIB;QT_3DANIMATION_LIB;QT_3DEXTRAS_LIB;QT_3DINPUT_LIB;QT_3DLOGIC_LIB;QT_3DRENDER_LIB;QT_CHARTS_LIB;QT_CORE_LIB;QT_DATAVISUALIZATION_LIB;QT_GUI_LIB;QT_MULTIMEDIA_LIB;QT_MULTIMEDIAWIDGETS_LIB;QT_NETWORK_LIB;QT_OPENGL_LIB;QT_OPENGLEXTENSIONS_LIB;QT_PRINTSUPPORT_LIB;QT_QUICK_LIB;QT_QUICKWIDGETS_LIB;QT_SQL_LIB;QT_UITOOLS_LIB;QT_WIDGETS_LIB;QT_XML_LIB;%(PreprocessorDefinitions)</Define>
+      <IncludePath>.\Plugin-ProcessBar\Header Files;.\Plugin-Dial\Header Files;.\Plugin-CustomPlot\Header Files;.\main\Header Files;.\HLA\include;.\HLA\Header Files;.\FMI\include;.\FMI\Header Files;.\ExampleMode\Header Files;.\CanPool\Header Files;.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\Qt3DCore;$(QTDIR)\include\Qt3DAnimation;$(QTDIR)\include\Qt3DExtras;$(QTDIR)\include\Qt3DInput;$(QTDIR)\include\Qt3DLogic;$(QTDIR)\include\Qt3DRender;$(QTDIR)\include\QtCharts;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtDataVisualization;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtMultimedia;$(QTDIR)\include\QtMultimediaWidgets;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtOpenGL;$(QTDIR)\include\QtOpenGLExtensions;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtQuick;$(QTDIR)\include\QtQuickWidgets;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtUiTools;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtXml;%(AdditionalIncludeDirectories)</IncludePath>
+      <Define>WIN32;WIN64;QT_DLL;QT_3DCORE_LIB;QT_3DANIMATION_LIB;QT_3DEXTRAS_LIB;QT_3DINPUT_LIB;QT_3DLOGIC_LIB;QT_3DRENDER_LIB;QT_CHARTS_LIB;QT_CORE_LIB;QT_DATAVISUALIZATION_LIB;QT_GUI_LIB;QT_MULTIMEDIA_LIB;QT_MULTIMEDIAWIDGETS_LIB;QT_NETWORK_LIB;QT_OPENGL_LIB;QT_OPENGLEXTENSIONS_LIB;QT_PRINTSUPPORT_LIB;QT_QUICK_LIB;QT_QUICKWIDGETS_LIB;QT_SQL_LIB;QT_UITOOLS_LIB;QT_WIDGETS_LIB;QT_XML_LIB;_MBCS</Define>
     </QtMoc>
     <QtUic>
       <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
@@ -103,7 +103,7 @@
       <OutputFile>.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
       <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
       <IncludePath>.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\Qt3DCore;$(QTDIR)\include\Qt3DAnimation;$(QTDIR)\include\Qt3DExtras;$(QTDIR)\include\Qt3DInput;$(QTDIR)\include\Qt3DLogic;$(QTDIR)\include\Qt3DRender;$(QTDIR)\include\QtCharts;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtDataVisualization;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtMultimedia;$(QTDIR)\include\QtMultimediaWidgets;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtOpenGL;$(QTDIR)\include\QtOpenGLExtensions;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtQuick;$(QTDIR)\include\QtQuickWidgets;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtUiTools;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtXml;%(AdditionalIncludeDirectories)</IncludePath>
-      <Define>UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_3DCORE_LIB;QT_3DANIMATION_LIB;QT_3DEXTRAS_LIB;QT_3DINPUT_LIB;QT_3DLOGIC_LIB;QT_3DRENDER_LIB;QT_CHARTS_LIB;QT_CORE_LIB;QT_DATAVISUALIZATION_LIB;QT_GUI_LIB;QT_MULTIMEDIA_LIB;QT_MULTIMEDIAWIDGETS_LIB;QT_NETWORK_LIB;QT_OPENGL_LIB;QT_OPENGLEXTENSIONS_LIB;QT_PRINTSUPPORT_LIB;QT_QUICK_LIB;QT_QUICKWIDGETS_LIB;QT_SQL_LIB;QT_UITOOLS_LIB;QT_WIDGETS_LIB;QT_XML_LIB;%(PreprocessorDefinitions)</Define>
+      <Define>UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_3DCORE_LIB;QT_3DANIMATION_LIB;QT_3DEXTRAS_LIB;QT_3DINPUT_LIB;QT_3DLOGIC_LIB;QT_3DRENDER_LIB;QT_CHARTS_LIB;QT_CORE_LIB;QT_DATAVISUALIZATION_LIB;QT_GUI_LIB;QT_MULTIMEDIA_LIB;QT_MULTIMEDIAWIDGETS_LIB;QT_NETWORK_LIB;QT_OPENGL_LIB;QT_OPENGLEXTENSIONS_LIB;QT_PRINTSUPPORT_LIB;QT_QUICK_LIB;QT_QUICKWIDGETS_LIB;QT_SQL_LIB;QT_UITOOLS_LIB;QT_WIDGETS_LIB;QT_XML_LIB</Define>
     </QtMoc>
     <QtUic>
       <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
@@ -121,173 +121,160 @@
     <QtRcc Include="SimuGUI.qrc" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="centralarea.h" />
+    <QtMoc Include="CanPool\Header Files\centralarea.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="colorprogressbar.h" />
+    <ClInclude Include="CanPool\Header Files\cursor.h" />
+    <ClInclude Include="CanPool\Header Files\qcanpool.h" />
+    <ClInclude Include="CanPool\Header Files\qcanpool_global.h" />
+    <ClInclude Include="CanPool\Header Files\screenhelper.h" />
+    <ClInclude Include="FMI\Header Files\FMISupport.h" />
+    <ClInclude Include="main\Header Files\cwidgets.h" />
+    <ClInclude Include="main\Header Files\theme.h" />
+    <QtMoc Include="Plugin-ProcessBar\Header Files\zoomcirclewait.h" />
+    <QtMoc Include="Plugin-ProcessBar\Header Files\waitprogressbar.h" />
+    <QtMoc Include="Plugin-ProcessBar\Header Files\stateprogressbar.h" />
+    <QtMoc Include="Plugin-ProcessBar\Header Files\qroundprogressbar.h" />
+    <QtMoc Include="Plugin-ProcessBar\Header Files\colorprogressbar.h" />
+    <QtMoc Include="Plugin-Dial\Header Files\dialplot.h" />
+    <QtMoc Include="Plugin-Dial\Header Files\dashboard.h" />
+    <QtMoc Include="Plugin-CustomPlot\Header Files\qcustomplot.h" />
+    <QtMoc Include="Plugin-CustomPlot\Header Files\qcustomchart.h" />
+    <QtMoc Include="Plugin-CustomPlot\Header Files\fcustomplot.h" />
+    <QtMoc Include="main\Header Files\skindialog.h" />
+    <QtMoc Include="main\Header Files\mainwindow.h" />
+    <QtMoc Include="main\Header Files\ctablewidget.h" />
+    <QtMoc Include="HLA\Header Files\HLARunControl.h" />
+    <QtMoc Include="HLA\Header Files\HLAPortAdapter.h" />
+    <QtMoc Include="HLA\Header Files\HLAFlowThread.h" />
+    <QtMoc Include="FMI\Header Files\FMISimulator.h" />
+    <QtMoc Include="ExampleMode\Header Files\paintmode.h" />
+    <QtMoc Include="ExampleMode\Header Files\menumode.h" />
+    <QtMoc Include="ExampleMode\Header Files\custommode.h" />
+    <QtMoc Include="CanPool\Header Files\tinytabwidget.h" />
+    <QtMoc Include="CanPool\Header Files\skinitem.h" />
+    <QtMoc Include="CanPool\Header Files\simplefilter.h" />
+    <QtMoc Include="CanPool\Header Files\quickaccessbar.h" />
+    <QtMoc Include="CanPool\Header Files\pagesorter.h" />
+    <QtMoc Include="CanPool\Header Files\modemanager.h" />
+    <QtMoc Include="CanPool\Header Files\ministack.h" />
+    <QtMoc Include="CanPool\Header Files\minisplitter.h" />
+    <QtMoc Include="CanPool\Header Files\minicard.h" />
+    <QtMoc Include="CanPool\Header Files\imodebutton.h" />
+    <QtMoc Include="CanPool\Header Files\imodebar_p.h" />
+    <QtMoc Include="CanPool\Header Files\imodebar.h" />
+    <QtMoc Include="CanPool\Header Files\imode.h" />
+    <QtMoc Include="CanPool\Header Files\fancywindow.h" />
+    <QtMoc Include="CanPool\Header Files\fancytabwidget.h" />
+    <QtMoc Include="CanPool\Header Files\fancytabbar.h" />
+    <QtMoc Include="CanPool\Header Files\fancytab.h" />
+    <QtMoc Include="CanPool\Header Files\fancynavbutton.h" />
+    <QtMoc Include="CanPool\Header Files\fancynavbar.h" />
+    <QtMoc Include="CanPool\Header Files\fancydialog.h" />
+    <QtMoc Include="CanPool\Header Files\fancybutton.h" />
+    <QtMoc Include="CanPool\Header Files\fancybar.h" />
+    <QtMoc Include="CanPool\Header Files\fancybanner.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="ctablewidget.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="cursor.h" />
-    <ClInclude Include="cwidgets.h" />
-    <QtMoc Include="HLARunControl.h" />
-    <QtMoc Include="HLAFlowThread.h">
-      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\HLApackage\include;.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\Qt3DCore;$(QTDIR)\include\Qt3DAnimation;$(QTDIR)\include\Qt3DExtras;$(QTDIR)\include\Qt3DInput;$(QTDIR)\include\Qt3DLogic;$(QTDIR)\include\Qt3DRender;$(QTDIR)\include\QtCharts;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtDataVisualization;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtMultimedia;$(QTDIR)\include\QtMultimediaWidgets;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtOpenGL;$(QTDIR)\include\QtOpenGLExtensions;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtQuick;$(QTDIR)\include\QtQuickWidgets;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtUiTools;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtXml</IncludePath>
-      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\Qt3DCore;$(QTDIR)\include\Qt3DAnimation;$(QTDIR)\include\Qt3DExtras;$(QTDIR)\include\Qt3DInput;$(QTDIR)\include\Qt3DLogic;$(QTDIR)\include\Qt3DRender;$(QTDIR)\include\QtCharts;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtDataVisualization;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtMultimedia;$(QTDIR)\include\QtMultimediaWidgets;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtOpenGL;$(QTDIR)\include\QtOpenGLExtensions;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtQuick;$(QTDIR)\include\QtQuickWidgets;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtUiTools;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtXml</IncludePath>
-    </QtMoc>
-    <QtMoc Include="HLAPortAdapter.h">
-      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\HLApackage\include;.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\Qt3DCore;$(QTDIR)\include\Qt3DAnimation;$(QTDIR)\include\Qt3DExtras;$(QTDIR)\include\Qt3DInput;$(QTDIR)\include\Qt3DLogic;$(QTDIR)\include\Qt3DRender;$(QTDIR)\include\QtCharts;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtDataVisualization;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtMultimedia;$(QTDIR)\include\QtMultimediaWidgets;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtOpenGL;$(QTDIR)\include\QtOpenGLExtensions;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtQuick;$(QTDIR)\include\QtQuickWidgets;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtUiTools;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtXml</IncludePath>
-      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\Qt3DCore;$(QTDIR)\include\Qt3DAnimation;$(QTDIR)\include\Qt3DExtras;$(QTDIR)\include\Qt3DInput;$(QTDIR)\include\Qt3DLogic;$(QTDIR)\include\Qt3DRender;$(QTDIR)\include\QtCharts;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtDataVisualization;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtMultimedia;$(QTDIR)\include\QtMultimediaWidgets;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtOpenGL;$(QTDIR)\include\QtOpenGLExtensions;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtQuick;$(QTDIR)\include\QtQuickWidgets;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtUiTools;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtXml</IncludePath>
-    </QtMoc>
-    <QtMoc Include="FMISimulator.h">
-      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\HLApackage\include;.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\Qt3DCore;$(QTDIR)\include\Qt3DAnimation;$(QTDIR)\include\Qt3DExtras;$(QTDIR)\include\Qt3DInput;$(QTDIR)\include\Qt3DLogic;$(QTDIR)\include\Qt3DRender;$(QTDIR)\include\QtCharts;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtDataVisualization;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtMultimedia;$(QTDIR)\include\QtMultimediaWidgets;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtOpenGL;$(QTDIR)\include\QtOpenGLExtensions;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtQuick;$(QTDIR)\include\QtQuickWidgets;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtUiTools;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtXml</IncludePath>
-      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\Qt3DCore;$(QTDIR)\include\Qt3DAnimation;$(QTDIR)\include\Qt3DExtras;$(QTDIR)\include\Qt3DInput;$(QTDIR)\include\Qt3DLogic;$(QTDIR)\include\Qt3DRender;$(QTDIR)\include\QtCharts;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtDataVisualization;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtMultimedia;$(QTDIR)\include\QtMultimediaWidgets;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtOpenGL;$(QTDIR)\include\QtOpenGLExtensions;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtQuick;$(QTDIR)\include\QtQuickWidgets;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtUiTools;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtXml</IncludePath>
-    </QtMoc>
-    <ClInclude Include="FMISupport.h" />
-    <ClInclude Include="qcanpool.h" />
-    <ClInclude Include="qcanpool_global.h" />
-    <ClInclude Include="screenhelper.h" />
-    <ClInclude Include="theme.h" />
-    <QtMoc Include="zoomcirclewait.h" />
-    <QtMoc Include="waitprogressbar.h" />
-    <QtMoc Include="tinytabwidget.h" />
-    <QtMoc Include="stateprogressbar.h" />
-    <QtMoc Include="skinitem.h" />
-    <QtMoc Include="skindialog.h" />
-    <QtMoc Include="simplefilter.h" />
-    <QtMoc Include="quickaccessbar.h" />
-    <QtMoc Include="qroundprogressbar.h" />
-    <QtMoc Include="qcustomplot.h" />
-    <QtMoc Include="qcustomchart.h" />
-    <QtMoc Include="paintmode.h" />
-    <QtMoc Include="pagesorter.h" />
-    <QtMoc Include="modemanager.h" />
-    <QtMoc Include="ministack.h" />
-    <QtMoc Include="minisplitter.h" />
-    <QtMoc Include="minicard.h" />
-    <QtMoc Include="menumode.h" />
-    <QtMoc Include="mainwindow.h" />
-    <QtMoc Include="imodebutton.h" />
-    <QtMoc Include="imodebar_p.h" />
-    <QtMoc Include="imodebar.h" />
-    <QtMoc Include="imode.h" />
-    <QtMoc Include="fcustomplot.h" />
-    <QtMoc Include="fancywindow.h" />
-    <QtMoc Include="fancytabwidget.h" />
-    <QtMoc Include="fancytabbar.h" />
-    <QtMoc Include="fancytab.h" />
-    <QtMoc Include="fancynavbutton.h" />
-    <QtMoc Include="fancynavbar.h" />
-    <QtMoc Include="fancydialog.h" />
-    <QtMoc Include="fancybutton.h" />
-    <QtMoc Include="fancybar.h" />
-    <QtMoc Include="fancybanner.h" />
-    <QtMoc Include="dialplot.h" />
-    <QtMoc Include="dashboard.h" />
-    <QtMoc Include="custommode.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="centralarea.cpp" />
-    <ClCompile Include="colorprogressbar.cpp" />
-    <ClCompile Include="Config.cpp" />
-    <ClCompile Include="ctablewidget.cpp" />
-    <ClCompile Include="cursor.cpp" />
-    <ClCompile Include="custommode.cpp" />
-    <ClCompile Include="dashboard.cpp" />
-    <ClCompile Include="dialplot.cpp" />
-    <ClCompile Include="fancybutton.cpp" />
-    <ClCompile Include="fancydialog.cpp" />
-    <ClCompile Include="fancynavbutton.cpp" />
-    <ClCompile Include="fancytab.cpp" />
-    <ClCompile Include="fancytabwidget.cpp" />
-    <ClCompile Include="fancywindow.cpp" />
-    <ClCompile Include="fcustomplot.cpp" />
-    <ClCompile Include="FMISimulator.cpp" />
-    <ClCompile Include="FMISupport.cpp" />
-    <ClCompile Include="HLAFlowThread.cpp" />
-    <ClCompile Include="HLAPortAdapter.cpp" />
-    <ClCompile Include="HLARunControl.cpp" />
-    <ClCompile Include="imode.cpp" />
-    <ClCompile Include="imodebar.cpp" />
-    <ClCompile Include="imodebutton.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="mainwindow.cpp" />
-    <ClCompile Include="menumode.cpp" />
-    <ClCompile Include="minisplitter.cpp" />
-    <ClCompile Include="pagesorter.cpp" />
-    <ClCompile Include="paintmode.cpp" />
-    <ClCompile Include="qcanpool.cpp" />
-    <ClCompile Include="qcustomchart.cpp" />
-    <ClCompile Include="qcustomplot.cpp" />
-    <ClCompile Include="qroundprogressbar.cpp" />
-    <ClCompile Include="screenhelper.cpp" />
-    <ClCompile Include="skindialog.cpp" />
-    <ClCompile Include="skinitem.cpp" />
-    <ClCompile Include="stateprogressbar.cpp" />
-    <ClCompile Include="theme.cpp" />
-    <ClCompile Include="waitprogressbar.cpp" />
-    <ClCompile Include="XmlElement.cpp" />
-    <ClCompile Include="XmlParser.cpp" />
-    <ClCompile Include="XmlParserCApi.cpp" />
-    <ClCompile Include="xmlVersionParser.c" />
-    <ClCompile Include="zoomcirclewait.cpp" />
-    <QtMoc Include="tinytabwidget.cpp">
+    <ClCompile Include="CanPool\Source Files\centralarea.cpp" />
+    <ClCompile Include="CanPool\Source Files\cursor.cpp" />
+    <ClCompile Include="CanPool\Source Files\fancybutton.cpp" />
+    <ClCompile Include="CanPool\Source Files\fancydialog.cpp" />
+    <ClCompile Include="CanPool\Source Files\fancynavbutton.cpp" />
+    <ClCompile Include="CanPool\Source Files\fancytab.cpp" />
+    <ClCompile Include="CanPool\Source Files\fancytabwidget.cpp" />
+    <ClCompile Include="CanPool\Source Files\fancywindow.cpp" />
+    <ClCompile Include="CanPool\Source Files\imode.cpp" />
+    <ClCompile Include="CanPool\Source Files\imodebar.cpp" />
+    <ClCompile Include="CanPool\Source Files\imodebutton.cpp" />
+    <ClCompile Include="CanPool\Source Files\minisplitter.cpp" />
+    <ClCompile Include="CanPool\Source Files\pagesorter.cpp" />
+    <ClCompile Include="CanPool\Source Files\qcanpool.cpp" />
+    <ClCompile Include="CanPool\Source Files\screenhelper.cpp" />
+    <ClCompile Include="CanPool\Source Files\skinitem.cpp" />
+    <ClCompile Include="ExampleMode\Source Files\custommode.cpp" />
+    <ClCompile Include="ExampleMode\Source Files\menumode.cpp" />
+    <ClCompile Include="ExampleMode\Source Files\paintmode.cpp" />
+    <ClCompile Include="FMI\Source Files\FMISimulator.cpp" />
+    <ClCompile Include="FMI\Source Files\FMISupport.cpp" />
+    <ClCompile Include="FMI\Source Files\XmlElement.cpp" />
+    <ClCompile Include="FMI\Source Files\XmlParser.cpp" />
+    <ClCompile Include="FMI\Source Files\XmlParserCApi.cpp" />
+    <ClCompile Include="FMI\Source Files\xmlVersionParser.c" />
+    <ClCompile Include="HLA\Source Files\Config.cpp" />
+    <ClCompile Include="HLA\Source Files\HLAFlowThread.cpp" />
+    <ClCompile Include="HLA\Source Files\HLAPortAdapter.cpp" />
+    <ClCompile Include="HLA\Source Files\HLARunControl.cpp" />
+    <ClCompile Include="main\Source Files\ctablewidget.cpp" />
+    <ClCompile Include="main\Source Files\main.cpp" />
+    <ClCompile Include="main\Source Files\mainwindow.cpp" />
+    <ClCompile Include="main\Source Files\skindialog.cpp" />
+    <ClCompile Include="main\Source Files\theme.cpp" />
+    <ClCompile Include="Plugin-CustomPlot\Source Files\fcustomplot.cpp" />
+    <ClCompile Include="Plugin-CustomPlot\Source Files\qcustomchart.cpp" />
+    <ClCompile Include="Plugin-CustomPlot\Source Files\qcustomplot.cpp" />
+    <ClCompile Include="Plugin-Dial\Source Files\dashboard.cpp" />
+    <ClCompile Include="Plugin-Dial\Source Files\dialplot.cpp" />
+    <ClCompile Include="Plugin-ProcessBar\Source Files\colorprogressbar.cpp" />
+    <ClCompile Include="Plugin-ProcessBar\Source Files\qroundprogressbar.cpp" />
+    <ClCompile Include="Plugin-ProcessBar\Source Files\stateprogressbar.cpp" />
+    <ClCompile Include="Plugin-ProcessBar\Source Files\waitprogressbar.cpp" />
+    <ClCompile Include="Plugin-ProcessBar\Source Files\zoomcirclewait.cpp" />
+    <QtMoc Include="CanPool\Source Files\tinytabwidget.cpp">
       <OutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\$(ConfigurationName)\%(Filename).moc</OutputFile>
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
       <OutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\%(Filename).moc</OutputFile>
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
     </QtMoc>
-    <QtMoc Include="simplefilter.cpp">
+    <QtMoc Include="CanPool\Source Files\simplefilter.cpp">
       <OutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\$(ConfigurationName)\%(Filename).moc</OutputFile>
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
       <OutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\%(Filename).moc</OutputFile>
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
     </QtMoc>
-    <QtMoc Include="quickaccessbar.cpp">
+    <QtMoc Include="CanPool\Source Files\quickaccessbar.cpp">
       <OutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\$(ConfigurationName)\%(Filename).moc</OutputFile>
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
       <OutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\%(Filename).moc</OutputFile>
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
     </QtMoc>
-    <QtMoc Include="modemanager.cpp">
+    <QtMoc Include="CanPool\Source Files\modemanager.cpp">
       <OutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\$(ConfigurationName)\%(Filename).moc</OutputFile>
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
       <OutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\%(Filename).moc</OutputFile>
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
     </QtMoc>
-    <QtMoc Include="ministack.cpp">
+    <QtMoc Include="CanPool\Source Files\ministack.cpp">
       <OutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\$(ConfigurationName)\%(Filename).moc</OutputFile>
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
       <OutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\%(Filename).moc</OutputFile>
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
     </QtMoc>
-    <QtMoc Include="minicard.cpp">
+    <QtMoc Include="CanPool\Source Files\minicard.cpp">
       <OutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\$(ConfigurationName)\%(Filename).moc</OutputFile>
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
       <OutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\%(Filename).moc</OutputFile>
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
     </QtMoc>
-    <QtMoc Include="fancytabbar.cpp">
+    <QtMoc Include="CanPool\Source Files\fancytabbar.cpp">
       <OutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\$(ConfigurationName)\%(Filename).moc</OutputFile>
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
       <OutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\%(Filename).moc</OutputFile>
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
     </QtMoc>
-    <QtMoc Include="fancynavbar.cpp">
+    <QtMoc Include="CanPool\Source Files\fancynavbar.cpp">
       <OutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\$(ConfigurationName)\%(Filename).moc</OutputFile>
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
       <OutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\%(Filename).moc</OutputFile>
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
     </QtMoc>
-    <QtMoc Include="fancybar.cpp">
+    <QtMoc Include="CanPool\Source Files\fancybar.cpp">
       <OutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\$(ConfigurationName)\%(Filename).moc</OutputFile>
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
       <OutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\%(Filename).moc</OutputFile>
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
     </QtMoc>
-    <QtMoc Include="fancybanner.cpp">
+    <QtMoc Include="CanPool\Source Files\fancybanner.cpp">
       <OutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\$(ConfigurationName)\%(Filename).moc</OutputFile>
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
       <OutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\%(Filename).moc</OutputFile>
