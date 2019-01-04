@@ -217,14 +217,16 @@ void MainWindow::createModeBar() {
 	m_pMenuMode = new MenuMode();
 	m_pHLARunControl = new HLARunControl();
 	m_pFMISimulator = new FMISimulator();
+	m_pModeling = new Modeling();
 
 	m_modeManager->objectAdded(m_pCustomMode);
 	m_modeManager->objectAdded(m_pPaintMode);
 	m_modeManager->objectAdded(m_pMenuMode);
 	//m_modeManager->objectAdded(m_pHLARunControl);
-	m_modeManager->objectAdded(m_pFMISimulator);
+	//m_modeManager->objectAdded(m_pFMISimulator);
+	m_modeManager->objectAdded(m_pModeling);
 
-	m_modeManager->setCurrentMode(m_pFMISimulator);
+	m_modeManager->setCurrentMode(m_pModeling);
 
 	//QAction *action = new QAction(QIcon("./Icon/tools/start"), tr("Start"), this);
 	//action->setShortcut(tr("Ctrl+R"));

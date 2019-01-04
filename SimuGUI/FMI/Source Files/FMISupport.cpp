@@ -34,6 +34,8 @@ static char currentDirectory[DIRECTORY_PATH_SIZE];
 #define DLL_DIR   "binaries\\win32\\"
 #endif
 
+ofstream logFile(".\\logs\\FMI.log");
+
 using namespace std;
 
 FMISupport::FMISupport(QObject *parent) : QObject(parent) {
@@ -277,6 +279,8 @@ void* FMISupport::getAdr(bool *success, HMODULE dllHandle, const char *functionN
 }
 
 void FMISupport::unLoad() {
+	fmu.terminate(c);
+	fmu.freeInstance(c);
 	FreeLibrary(fmu.dllHandle);
 	freeModelDescription(fmu.modelDescription);
 	ostringstream ss;
@@ -355,7 +359,7 @@ bool FMISupport::simulateByCs(
 		return false;
 	}
 
-	QString ss1 = ".\\logs\\";
+	QString ss1 = ".\\logs\\fmics";
 	QString ss2 = instanceName;
 	QString ss3 = ".csv";
 	QString s = ss1 + ss2 + ss3;
@@ -398,9 +402,6 @@ bool FMISupport::simulateByCs(
 		nSteps++;
 	}
 
-	fmu.terminate(c);
-	fmu.freeInstance(c);
-
 	QString s1 = "Simulation from ";
 	QString s2 = QString::number(tStart);
 	QString s3 = " to ";
@@ -425,6 +426,258 @@ bool FMISupport::simulateByMe(
 	int nCategories,
 	char **categories) {
 
+	bool loggingOn = true;
+
+	ModelDescription* md = fmu.modelDescription;
+	//获取信息
+	const char* guid = getAttributeValue((Element*)md, att_guid);
+	const char* instanceName = getAttributeValue((Element*)getModelExchange(md), att_modelIdentifier);
+
+	ostringstream ss;
+	string str;
+
+	ss << currentDir << OUT_PATH << "resources\\";
+	str = ss.str();
+
+	//回调 
+	fmi2CallbackFunctions callbacks = { fmuLogger, calloc, free, NULL, &fmu };
+
+	//无可视化组件
+	fmi2Boolean visible = fmi2False;
+
+	//最后一项为loggingOn
+	fmi2Component c = fmu.instantiate(instanceName, fmi2ModelExchange, guid, str.c_str(), &callbacks, visible, loggingOn);
+	if (!c) {
+		emit postUIMsg("could not instantiate model");
+		return false;
+	}
+
+	if (nCategories > 0) {
+		fmi2Status fmi2Flag = fmu.setDebugLogging(c, fmi2True, nCategories, categories);
+		if (fmi2Flag > fmi2Warning) {
+			emit postUIMsg("failed FMI set debug logging");
+			return 0;
+		}
+	}
+
+	//状态数
+	int nx = getDerivativesSize(getModelStructure(md));
+	//indicators数
+	ValueStatus vs;
+	int nz = getAttributeInt((Element*)md, att_numberOfEventIndicators, &vs);
+	//各个状态，是double类型的，对应于real
+	double *x = NULL;
+	x = (double*)calloc(nx, sizeof(double));
+	//各个状态微分，是double类型的，对应于real
+	double *xdot = NULL;
+	xdot = (double*)calloc(nx, sizeof(double));
+	//各个indicators
+	double *z = NULL;
+	//前一个indicator
+	double *prez = NULL;
+	if (nz > 0) {
+		z = (double*)calloc(nz, sizeof(double));
+		prez = (double*)calloc(nz, sizeof(double));
+	}
+	if ((!x || !xdot) || (nz > 0 && (!z || !prez))) {
+		emit postUIMsg("out of memory");
+		return false;
+	}
+
+	fmi2Boolean toleranceDefined = fmi2False;
+	fmi2Real tolerance = 0;
+	//准备
+	fmi2Status fmi2Flag = fmu.setupExperiment(c, toleranceDefined, tolerance, tStart, fmi2True, tEnd);
+	if (fmi2Flag > fmi2Warning) {
+		emit postUIMsg("failed FMI setup experiment");
+		return false;
+	}
+
+	//模型初始化
+	fmi2Flag = fmu.enterInitializationMode(c);
+	if (fmi2Flag > fmi2Warning) {
+		emit postUIMsg("failed FMI enter initialization mode");
+		return false;
+	}
+	fmi2Flag = fmu.exitInitializationMode(c);
+	if (fmi2Flag > fmi2Warning) {
+		emit postUIMsg("failed FMI exit initialization mode");
+		return false;
+	}
+
+	//事件迭代
+	fmi2EventInfo eventInfo;
+	eventInfo.newDiscreteStatesNeeded = fmi2True;
+	eventInfo.terminateSimulation = fmi2False;
+	while (eventInfo.newDiscreteStatesNeeded && !eventInfo.terminateSimulation) {
+		fmi2Flag = fmu.newDiscreteStates(c, &eventInfo);
+		if (fmi2Flag > fmi2Warning) {
+			emit postUIMsg("could not set a new discrete state");
+			return 0;
+		}
+	}
+
+	QString ss1 = ".\\logs\\fmime\\";
+	QString ss2 = instanceName;
+	QString ss3 = ".csv";
+	QString s = ss1 + ss2 + ss3;
+
+	ofstream dataFile(s.toStdString().data());
+
+	double time = tStart;
+	double dt, tPre;
+	fmi2Boolean timeEvent, stateEvent, stepEvent, terminateSimulation;
+	int nSteps = 0;
+	int nTimeEvents = 0;
+	int nStateEvents = 0;
+	int nStepEvents = 0;
+	if (eventInfo.terminateSimulation) {
+		emit postUIMsg("model requested termination at t = " + QString::number(time));
+	}
+	else {
+		fmu.enterContinuousTimeMode(c);
+		outputData(dataFile, tStart, true);
+		outputData(dataFile, tStart, false);
+
+		while (time < tEnd) {
+			//1.获取当前状态
+			fmi2Flag = fmu.getContinuousStates(c, x, nx);
+			if (fmi2Flag > fmi2Warning) {
+				emit postUIMsg("could not retrieve states");
+				return false;
+			}
+			//2.获取状态导数
+			fmi2Flag = fmu.getDerivatives(c, xdot, nx);
+			if (fmi2Flag > fmi2Warning) {
+				emit postUIMsg("could not retrieve derivatives");
+				return false;
+			}
+			//3.时间事件
+			tPre = time;
+			time = min(time + h, tEnd);
+			timeEvent = eventInfo.nextEventTimeDefined && (eventInfo.nextEventTime < time);
+			if (timeEvent) {
+				time = eventInfo.nextEventTime;
+			}
+			dt = time - tPre;
+			fmi2Flag = fmu.setTime(c, time);
+			if (fmi2Flag > fmi2Warning) {
+				emit postUIMsg("could not set time");
+				return false;
+			}
+			//4.前进一步
+			for (int i = 0; i < nx; i++) {
+				//欧拉折线
+				x[i] += dt * xdot[i];
+			}
+			fmi2Flag = fmu.setContinuousStates(c, x, nx);
+			if (fmi2Flag > fmi2Warning) {
+				emit postUIMsg("could not set states");
+				return false;
+			}
+			if (loggingOn) {
+				logFile << "Step " << nSteps << " to t = " << time << endl;
+			}
+			//5.检查状态事件
+			for (int i = 0; i < nz; i++) {
+				prez[i] = z[i];
+			}
+			fmi2Flag = fmu.getEventIndicators(c, z, nz);
+			if (fmi2Flag > fmi2Warning) {
+				emit postUIMsg("could not retrieve event indicators");
+				return false;
+			}
+			stateEvent = FALSE;
+			for (int i = 0; i < nz; i++) {
+				stateEvent = stateEvent || (prez[i] * z[i] < 0);
+			}
+			//6.检查步进事件
+			fmi2Flag = fmu.completedIntegratorStep(c, fmi2True, &stepEvent, &terminateSimulation);
+			if (fmi2Flag > fmi2Warning) {
+				emit postUIMsg("could not complete integrator step");
+				return false;
+			}
+			if (terminateSimulation) {
+				emit postUIMsg("model requested termination at t=" + QString::number(time));
+				break;
+			}
+			//7.处理事件
+			if (timeEvent || stateEvent || stepEvent) {
+				fmu.enterEventMode(c);
+				if (timeEvent) {
+					nTimeEvents++;
+					if (loggingOn) {
+						logFile << "time event at t=" << time << endl;
+					}
+				}
+				if (stateEvent) {
+					nStateEvents++;
+					if (loggingOn) {
+						for (int i = 0; i < nz; i++) {
+							logFile << "state event " << ((prez[i] > 0 && z[i] < 0) ? "-\\-" : "-/-")
+								<< " z[" << i << "] at t=" << time << endl;
+						}
+					}
+				}
+				if (stepEvent) {
+					nStepEvents++;
+					if (loggingOn) {
+						logFile << "step event at t = " << time << endl;
+					}
+				}
+				eventInfo.newDiscreteStatesNeeded = fmi2True;
+				eventInfo.terminateSimulation = fmi2False;
+				while (eventInfo.newDiscreteStatesNeeded && !eventInfo.terminateSimulation) {
+					fmi2Flag = fmu.newDiscreteStates(c, &eventInfo);
+					if (fmi2Flag > fmi2Warning) {
+						emit postUIMsg("could not set a new discrete state");
+						return false;
+					}
+					if (eventInfo.valuesOfContinuousStatesChanged && loggingOn) {
+						emit postUIMsg("continuous state values changed at t=" + QString::number(time));
+					}
+					if (eventInfo.nominalsOfContinuousStatesChanged && loggingOn) {
+						emit postUIMsg("nominals of continuous state changed  at t=" + QString::number(time));
+					}
+				}
+				if (eventInfo.terminateSimulation) {
+					emit postUIMsg("model requested termination at t=" + QString::number(time));
+					break;
+				}
+				fmu.enterContinuousTimeMode(c);
+			}
+			outputData(dataFile, time, false);
+			nSteps++;
+		}
+	}
+
+	QString s1 = "Simulation from ";
+	QString s2 = QString::number(tStart);
+	QString s3 = " to ";
+	QString s4 = QString::number(tEnd);;
+	emit postUIMsg(s1 + s2 + s3 + s4);
+
+	QString s5 = "steps ............ ";
+	QString s6 = QString::number(nSteps);
+	emit postUIMsg(s5 + s6);
+
+	QString s7 = "fixed step size .. ";
+	QString s8 = QString::number(h);
+	emit postUIMsg(s7 + s8);
+
+	QString s9 = "time events ...... ";
+	QString s10 = QString::number(nTimeEvents);
+	emit postUIMsg(s9 + s10);
+
+	QString s11 = "state events ..... ";
+	QString s12 = QString::number(nStateEvents);
+	emit postUIMsg(s11 + s12);
+
+	QString s13 = "step events ...... ";
+	QString s14 = QString::number(nStepEvents);
+	emit postUIMsg(s13 + s14);
+
+	return true;
 }
 
 void FMISupport::outputData(ofstream& file, double time, bool isHeader) {
@@ -483,7 +736,6 @@ void FMISupport::outputData(ofstream& file, double time, bool isHeader) {
 
 
 /**************************************************************/
-ofstream logFile(".\\logs\\FMI.log");
 #define MAX_MSG_SIZE 1000
 void fmuLogger(
 	void *componentEnvironment,

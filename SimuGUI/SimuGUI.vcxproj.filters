@@ -92,6 +92,15 @@
     <Filter Include="Plugin-ProcessBar\Source Files">
       <UniqueIdentifier>{b86aa3a0-851d-46f5-83dd-e6e442a029bc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="modeling">
+      <UniqueIdentifier>{adda8292-726f-4c56-84c5-8d3bc65211a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="modeling\Header Files">
+      <UniqueIdentifier>{ae8f7a44-7ed0-43a5-ac13-0278a7d03bd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="modeling\SourceFiles">
+      <UniqueIdentifier>{5e595635-da64-4e11-8db0-89fe6de5748c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="SimuGUI.ui">
@@ -269,6 +278,9 @@
     <QtMoc Include="FMI\Header Files\FMISupport.h">
       <Filter>FMI\Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="Modeling.h">
+      <Filter>modeling\Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CanPool\Header Files\cursor.h">
@@ -422,6 +434,9 @@
     </ClCompile>
     <ClCompile Include="Plugin-ProcessBar\Source Files\zoomcirclewait.cpp">
       <Filter>Plugin-ProcessBar\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Modeling.cpp">
+      <Filter>modeling\SourceFiles</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
