@@ -11,6 +11,10 @@
 #include "imode.h"
 
 #include "cwidgets.h"
+#include "ministack.h"
+#include "DragButton.h"
+#include "DropLabel.h"
+#include "ToolDragStack.h"
 
 class Modeling : public IMode {
 
@@ -26,5 +30,11 @@ public slots:
 
 private:
 	void createWindow();
+	void createToolStack();
+	void createModelStack();
+
+private:
+	ToolDragStack *m_pToolStack;
+	DropLabel *m_pModelLabel;
 };
 #endif // MODELING_H

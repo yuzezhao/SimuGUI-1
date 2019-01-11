@@ -92,13 +92,22 @@
     <Filter Include="Plugin-ProcessBar\Source Files">
       <UniqueIdentifier>{b86aa3a0-851d-46f5-83dd-e6e442a029bc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="modeling">
+    <Filter Include="FMIAdvance">
+      <UniqueIdentifier>{86308000-2e6b-4a4e-9090-ec48d2a8216a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FMIAdvance\Header Files">
+      <UniqueIdentifier>{6ff66282-6458-4f35-a2e1-4f7bcd0f0a3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FMIAdvance\Source Files">
+      <UniqueIdentifier>{18412897-9331-4592-b91d-6ae83ece0b55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modeling">
       <UniqueIdentifier>{adda8292-726f-4c56-84c5-8d3bc65211a7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="modeling\Header Files">
+    <Filter Include="Modeling\Header Files">
       <UniqueIdentifier>{ae8f7a44-7ed0-43a5-ac13-0278a7d03bd0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="modeling\SourceFiles">
+    <Filter Include="Modeling\SourceFiles">
       <UniqueIdentifier>{5e595635-da64-4e11-8db0-89fe6de5748c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -278,8 +287,20 @@
     <QtMoc Include="FMI\Header Files\FMISupport.h">
       <Filter>FMI\Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Modeling.h">
-      <Filter>modeling\Header Files</Filter>
+    <QtMoc Include="FMIAdvance\Header Files\FMIAdvance.h">
+      <Filter>FMIAdvance\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Modeling\Header Files\Modeling.h">
+      <Filter>Modeling\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="DragButton.h">
+      <Filter>Modeling\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="DropLabel.h">
+      <Filter>Modeling\Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="ToolDragStack.h">
+      <Filter>Modeling\Header Files</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -435,8 +456,14 @@
     <ClCompile Include="Plugin-ProcessBar\Source Files\zoomcirclewait.cpp">
       <Filter>Plugin-ProcessBar\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Modeling.cpp">
-      <Filter>modeling\SourceFiles</Filter>
+    <ClCompile Include="FMIAdvance\Source Files\FMIAdvance.cpp">
+      <Filter>FMIAdvance\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Modeling\Source Files\Modeling.cpp">
+      <Filter>Modeling\SourceFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolDragStack.cpp">
+      <Filter>Modeling\SourceFiles</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

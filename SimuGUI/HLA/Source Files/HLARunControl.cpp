@@ -11,7 +11,7 @@ HLARunControl::HLARunControl(QWidget *parent) : IMode(parent) {
 
 	setObjectName(QLatin1String("HLARunControl"));
 	setDisplayName(tr("HLA\nRunControl"));
-	setIcon(QIcon("./Icon/mode/hlarc"));
+	setIcon(QIcon("./Icon/mode/hla"));
 
 	createWindow();
 

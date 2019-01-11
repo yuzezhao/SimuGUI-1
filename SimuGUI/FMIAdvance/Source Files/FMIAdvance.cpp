@@ -1,21 +1,21 @@
 
-#include "Modeling.h"
+#include "FMIAdvance.h"
 
-Modeling::Modeling(QWidget *parent) : IMode(parent) {
+FMIAdvance::FMIAdvance(QWidget *parent) : IMode(parent) {
 
-	setObjectName(QLatin1String("Modeling"));
-	setDisplayName(tr("Modeling"));
-	setIcon(QIcon("./Icon/mode/model"));
+	setObjectName(QLatin1String("FMIAdvance"));
+	setDisplayName(tr("FMI\nAdvance"));
+	setIcon(QIcon("./Icon/mode/fmi"));
 
 	createWindow();
 }
 
-void Modeling::createWindow() {
+void FMIAdvance::createWindow() {
 
 	QWidget *widget = new QWidget();
 
 	QLabel *title = new QLabel();
-	title->setText("Modeling");
+	title->setText("FMU Simulator Advance");
 	QFont font("Microsoft YaHei", 20, 75);
 	title->setFont(font);
 
