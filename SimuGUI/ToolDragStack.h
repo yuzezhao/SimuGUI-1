@@ -19,7 +19,7 @@ public:
 
 	virtual void mousePressEvent(QMouseEvent *e);
 
-	Qt::DropAction m_acceptableDropAction;
+	//Qt::DropAction m_acceptableDropAction;
 
 	QLabel* m_cLabel;
 	QLabel* m_matlabLabel;

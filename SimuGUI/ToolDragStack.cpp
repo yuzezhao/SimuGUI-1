@@ -1,6 +1,8 @@
 
 #include "ToolDragStack.h"
 
+#include "DropLabel.h"
+
 ToolDragStack::ToolDragStack(QWidget *p) : MiniStack(p) {
 
 	m_cLabel = new QLabel();
@@ -45,29 +47,33 @@ void ToolDragStack::mousePressEvent(QMouseEvent *event) {
 		//TODO:magic number，默认的stack头高40
 		point.setY(point.y() - 40);
 
+		QString modelName = "ha";
+		QString modelType;
+
 		if (m_cLabel->geometry().contains(point)) {
 			m_dragLabel = m_cLabel;
+			modelType = CType;
 		}
 		else if (m_matlabLabel->geometry().contains(point)) {
 			m_dragLabel = m_matlabLabel;
+			modelType = MatlabType;
 		}
 		else if (m_adamsLabel->geometry().contains(point)) {
 			m_dragLabel = m_adamsLabel;
+			modelType = AdamsType;
 		}
 		else {
 			return;
 		}
 
 		QDrag *dg = new QDrag(m_dragLabel);
+		dg->setPixmap(*(m_dragLabel->pixmap()));
 
-		//dg->setPixmap(*(m_dragLabel->pixmap()));
-		 
 		QMimeData *md = new QMimeData;
-
 		md->setImageData(m_dragLabel->pixmap()->toImage());
-
+		md->setObjectName(modelName);
+		md->setText(modelType);
 		dg->setMimeData(md);
-
 		dg->exec();
 	}
 	//QWidget::mousePressEvent(event);

@@ -6,31 +6,31 @@
 #include "cwidgets.h"
 #include "fancybutton.h"
 
+#define CType "C"
+#define MatlabType "Matlab"
+#define AdamsType "Adams"
+
+struct modelInfo {
+	QString name;
+	QString type;
+	QLabel *label;
+};
+
 class DropLabel :public QLabel {
 
 	Q_OBJECT
 
 public:
-
 	DropLabel(QWidget *p = 0) : QLabel(p) {}
 
-	void dragEnterEvent(QDragEnterEvent *e) {
-		e->accept();
-	}
+	void dragEnterEvent(QDragEnterEvent*);
+	void dropEvent(QDropEvent*);
 
-	void dropEvent(QDropEvent *e) {
+signals:
+	void addModelRequest(QString, QString);
 
-		QLabel *label = new QLabel(this);
-		//l->setStyleSheet("border:2px solid red;");
-		label->setGeometry(e->pos().x(), e->pos().y(), 60, 60);
-
-		QPixmap pixmap = QPixmap::fromImage(e->mimeData()->imageData().value<QImage>());
-		pixmap.scaled(label->size(), Qt::KeepAspectRatio);
-		label->setScaledContents(true);
-		
-		label->setPixmap(pixmap);
-		label->show();
-	}
+private:
+	QList<modelInfo> modelList;
 };
 
 #endif // DROPLABEL_H

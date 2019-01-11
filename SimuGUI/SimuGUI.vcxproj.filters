@@ -293,9 +293,6 @@
     <QtMoc Include="Modeling\Header Files\Modeling.h">
       <Filter>Modeling\Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="DragButton.h">
-      <Filter>Modeling\Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="DropLabel.h">
       <Filter>Modeling\Header Files</Filter>
     </QtMoc>
@@ -463,6 +460,9 @@
       <Filter>Modeling\SourceFiles</Filter>
     </ClCompile>
     <ClCompile Include="ToolDragStack.cpp">
+      <Filter>Modeling\SourceFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="DropLabel.cpp">
       <Filter>Modeling\SourceFiles</Filter>
     </ClCompile>
   </ItemGroup>

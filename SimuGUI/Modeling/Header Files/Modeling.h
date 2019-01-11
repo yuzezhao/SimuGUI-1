@@ -12,7 +12,6 @@
 
 #include "cwidgets.h"
 #include "ministack.h"
-#include "DragButton.h"
 #include "DropLabel.h"
 #include "ToolDragStack.h"
 
@@ -26,15 +25,18 @@ public:
 signals:
 
 public slots:
+	void addModel(QString);
 	//void test();
 
 private:
 	void createWindow();
 	void createToolStack();
 	void createModelStack();
+	void createModelList();
 
 private:
 	ToolDragStack *m_pToolStack;
 	DropLabel *m_pModelLabel;
+	QTableWidget *m_pModelList;
 };
 #endif // MODELING_H
