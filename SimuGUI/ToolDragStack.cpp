@@ -47,7 +47,6 @@ void ToolDragStack::mousePressEvent(QMouseEvent *event) {
 		//TODO:magic number，默认的stack头高40
 		point.setY(point.y() - 40);
 
-		QString modelName = "ha";
 		QString modelType;
 
 		if (m_cLabel->geometry().contains(point)) {
@@ -71,8 +70,7 @@ void ToolDragStack::mousePressEvent(QMouseEvent *event) {
 
 		QMimeData *md = new QMimeData;
 		md->setImageData(m_dragLabel->pixmap()->toImage());
-		md->setObjectName(modelName);
-		md->setText(modelType);
+		md->setObjectName(modelType);
 		dg->setMimeData(md);
 		dg->exec();
 	}

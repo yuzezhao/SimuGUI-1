@@ -25,8 +25,7 @@ public:
 signals:
 
 public slots:
-	void addModel(QString);
-	//void test();
+	void addModel(QString, QString);
 
 private:
 	void createWindow();

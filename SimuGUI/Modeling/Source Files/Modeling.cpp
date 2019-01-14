@@ -23,7 +23,8 @@ void Modeling::createWindow() {
 	createModelStack();
 	createModelList();
 
-	connect(m_pModelLabel, SIGNAL(addModelRequest(QString)), this, SLOT(addModel(QString)));
+	connect(m_pModelLabel, SIGNAL(addModelRequest(QString, QString)),
+		this, SLOT(addModel(QString, QString)));
 
 	QGridLayout *layout = new QGridLayout();
 	layout->setMargin(10);
@@ -55,17 +56,21 @@ void Modeling::createModelList() {
 	m_pModelList = new QTableWidget();
 
 	//表头
-	m_pModelList->setColumnCount(2);
+	m_pModelList->setColumnCount(3);
 	//m_pModelList->horizontalHeader()->setDefaultSectionSize(80);
 	m_pModelList->horizontalHeader()->setSectionsClickable(false);
+	m_pModelList->setColumnWidth(1, 80);
+	m_pModelList->setColumnWidth(2, 30);
+	m_pModelList->setColumnWidth(3, 30);
+
 	QFont font;
 	font.setBold(true);
 	m_pModelList->horizontalHeader()->setFont(font);
-	m_pModelList->horizontalHeader()->setStretchLastSection(true);
+	//m_pModelList->horizontalHeader()->setStretchLastSection(true);
 	m_pModelList->horizontalHeader()->setStyleSheet("QHeaderView::section{background:skyblue;}");
 
 	//列
-	//m_pModelList->verticalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+	m_pModelList->verticalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
 	m_pModelList->verticalHeader()->setVisible(false);
 
 	//选择模式
@@ -74,7 +79,7 @@ void Modeling::createModelList() {
 	m_pModelList->setStyleSheet("selection-background-color:lightblue;");
 
 	QStringList header;
-	header << "Name" << "Type";
+	header << "Name" << "Type" << "Delete";
 	m_pModelList->setHorizontalHeaderLabels(header);
 
 	m_pModelList->horizontalScrollBar()->setStyleSheet("QScrollBar{background:transparent; height:10px;}"
@@ -87,16 +92,12 @@ void Modeling::createModelList() {
 		"QScrollBar::handle:hover{background:gray;}"
 		"QScrollBar::sub-line{background:transparent;}"
 		"QScrollBar::add-line{background:transparent;}");
-
-	int row;
-	for (int i = 0; i < 40; ++i) {
-		row = m_pModelList->rowCount();
-		m_pModelList->insertRow(row);
-		m_pModelList->setItem(row, 0, new QTableWidgetItem("sss"));
-		m_pModelList->setItem(row, 1, new QTableWidgetItem("sss"));
-	}
 }
 
-void Modeling::addModel(QString modelName) {
-	//m_pModelList->addItem(modelName);
+void Modeling::addModel(QString modelName, QString modelType) {
+	int row = m_pModelList->rowCount();
+	m_pModelList->insertRow(row);
+	m_pModelList->setItem(row, 0, new QTableWidgetItem(modelName));
+	m_pModelList->setItem(row, 1, new QTableWidgetItem(modelType));
+	m_pModelList->setItem(row, 2, new QTableWidgetItem(QIcon("./Icon/tools/delete"), NULL));
 }

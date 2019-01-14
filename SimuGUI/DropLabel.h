@@ -21,7 +21,7 @@ class DropLabel :public QLabel {
 	Q_OBJECT
 
 public:
-	DropLabel(QWidget *p = 0) : QLabel(p) {}
+	explicit DropLabel(QWidget *p = 0);
 
 	void dragEnterEvent(QDragEnterEvent*);
 	void dropEvent(QDropEvent*);
@@ -30,7 +30,13 @@ signals:
 	void addModelRequest(QString, QString);
 
 private:
+	QString getName(QString);
+
+private:
 	QList<modelInfo> modelList;
+	QSet<int> CNameSet;
+	QSet<int> MatlabNameSet;
+	QSet<int> AdamsNameSet;
 };
 
 #endif // DROPLABEL_H
