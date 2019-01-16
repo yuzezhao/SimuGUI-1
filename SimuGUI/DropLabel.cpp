@@ -32,15 +32,7 @@ void DropLabel::dropEvent(QDropEvent *e) {
 
 		model.label = label;
 		modelList.append(model);
-		e->setDropAction(Qt::MoveAction);
-		e->accept();
 		emit addModelRequest(model.name, model.type);
-	}
-	else if (DRAG_MOVE == moveType) {
-		QLabel *label = e->mimeData()->property("label").value<QLabel*>();
-		QPoint point = e->pos();
-		QRect rect(e->pos(), label->size());
-		label->setGeometry(rect);
 	}
 }
 
@@ -86,6 +78,7 @@ void DropLabel::deleteModel(QString name) {
 	QList<modelInfo>::iterator itor;
 	for (itor = modelList.begin(); itor != modelList.end(); itor++) {
 		if (itor->name == name) {
+			//删除图标
 			QLabel *label = itor->label;
 			delete label;
 			//插入可用数字
