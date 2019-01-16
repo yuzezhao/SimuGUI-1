@@ -17,9 +17,8 @@ void DropLabel::dropEvent(QDropEvent *e) {
 	QString moveType = e->mimeData()->text();
 
 	if (DRAP_COPY == moveType) {
-		modelInfo model;
-		model.type = e->mimeData()->objectName();
-		model.name = getName(model.type);
+
+		modelInfo model = getModel(e->mimeData()->objectName());
 
 		QLabel *label = new QLabel(this);
 		label->setStyleSheet("border:1px solid gray;");
@@ -46,13 +45,13 @@ void DropLabel::dropEvent(QDropEvent *e) {
 }
 
 void DropLabel::mousePressEvent(QMouseEvent *event) {
-	
+
 	if (event->button() & Qt::LeftButton) {
-		
+
 		QPoint point = event->localPos().toPoint();
-		
+
 		QList<modelInfo>::iterator itor;
-		
+
 		for (itor = modelList.begin(); itor != modelList.end(); itor++) {
 			if (itor->label->geometry().contains(point)) {
 				//emit sendMes(itor->name);
@@ -83,35 +82,61 @@ void DropLabel::dragMoveEvent(QDragMoveEvent *event) {
 	}
 }
 
-QString DropLabel::getName(QString type) {
+void DropLabel::deleteModel(QString name) {
+	QList<modelInfo>::iterator itor;
+	for (itor = modelList.begin(); itor != modelList.end(); itor++) {
+		if (itor->name == name) {
+			QLabel *label = itor->label;
+			delete label;
+			//插入可用数字
+			if (itor->type == CType) {
+				CNameSet.insert(itor->count);
+				
+			}
+			else if (itor->type == MatlabType) {
+				MatlabNameSet.insert(itor->count);
+			}
+			else if (itor->type == AdamsType) {
+				AdamsNameSet.insert(itor->count);
+			}
+			//列表删除项
+			modelList.erase(itor++);
+			return;
+		}
+	}
+	emit sendMes("error");
+}
+
+modelInfo DropLabel::getModel(QString type) {
+	modelInfo model;
+	model.type = type;
+	QString name = "error";
+	int next = 7777;
 	if (type == CType) {
-		int next = *CNameSet.begin();
-		QString name = "CModel_" + QString::number(next);
-		CNameSet.remove(next);
-		if (CNameSet.isEmpty()) {
+		next = *CNameSet.begin();
+		name = "CModel_" + QString::number(next);
+		CNameSet.erase(next);
+		if (CNameSet.empty()) {
 			CNameSet.insert(next + 1);
 		}
-		return name;
 	}
 	else if (type == MatlabType) {
-		int next = *MatlabNameSet.begin();
-		QString name = "MatlabModel_" + QString::number(next);
-		MatlabNameSet.remove(next);
-		if (MatlabNameSet.isEmpty()) {
+		next = *MatlabNameSet.begin();
+		name = "MatlabModel_" + QString::number(next);
+		MatlabNameSet.erase(next);
+		if (MatlabNameSet.empty()) {
 			MatlabNameSet.insert(next + 1);
 		}
-		return name;
 	}
 	else if (type == AdamsType) {
-		int next = *AdamsNameSet.begin();
-		QString name = "AdamsModel_" + QString::number(next);
-		AdamsNameSet.remove(next);
-		if (AdamsNameSet.isEmpty()) {
+		next = *AdamsNameSet.begin();
+		name = "AdamsModel_" + QString::number(next);
+		AdamsNameSet.erase(next);
+		if (AdamsNameSet.empty()) {
 			AdamsNameSet.insert(next + 1);
 		}
-		return name;
 	}
-	else {
-		return NULL;
-	}
+	model.count = next;
+	model.name = name;
+	return model;
 }

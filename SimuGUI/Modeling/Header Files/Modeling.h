@@ -23,10 +23,15 @@ public:
 	explicit Modeling(QWidget *parent = 0);
 
 signals:
+	void deleteModelRequest(QString);
 
 public slots:
 	void addModel(QString, QString);
+
 	void receiveMes(QString);
+
+private slots:
+	void deleteOne();
 
 private:
 	void createWindow();

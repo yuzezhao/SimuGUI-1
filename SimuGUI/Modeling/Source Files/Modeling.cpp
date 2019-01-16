@@ -26,6 +26,8 @@ void Modeling::createWindow() {
 
 	connect(m_pModelLabel, SIGNAL(addModelRequest(QString, QString)),
 		this, SLOT(addModel(QString, QString)));
+	connect(this, SIGNAL(deleteModelRequest(QString)),
+		m_pModelLabel, SLOT(deleteModel(QString)));
 
 	//test
 	connect(m_pModelLabel, SIGNAL(sendMes(QString)),
@@ -104,7 +106,24 @@ void Modeling::addModel(QString modelName, QString modelType) {
 	m_pModelList->insertRow(row);
 	m_pModelList->setItem(row, 0, new QTableWidgetItem(modelName));
 	m_pModelList->setItem(row, 1, new QTableWidgetItem(modelType));
-	m_pModelList->setItem(row, 2, new QTableWidgetItem(QIcon("./Icon/tools/delete"), NULL));
+
+	FancyButton *deleteButton = new FancyButton();
+	deleteButton->setIcon(QIcon("./Icon/tools/delete"));
+	deleteButton->setCursor(QCursor(Qt::PointingHandCursor));
+	connect(deleteButton, SIGNAL(clicked()), this, SLOT(deleteOne()));
+	m_pModelList->setCellWidget(row, 2, deleteButton);
+}
+
+void Modeling::deleteOne() {
+	FancyButton *senderObj = qobject_cast<FancyButton*>(sender());
+	if (senderObj == 0) {
+		return;
+	}
+	QModelIndex index = m_pModelList->indexAt(
+		QPoint(senderObj->frameGeometry().x(), senderObj->frameGeometry().y()));
+	int row = index.row();
+	emit deleteModelRequest(m_pModelList->item(row, 0)->text());
+	m_pModelList->removeRow(row);
 }
 
 void Modeling::receiveMes(QString s) {

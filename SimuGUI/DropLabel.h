@@ -3,6 +3,8 @@
 #ifndef DROPLABEL_H
 #define DROPLABEL_H
 
+#include <set>
+
 #include "cwidgets.h"
 #include "fancybutton.h"
 
@@ -16,6 +18,7 @@
 struct modelInfo {
 	QString name;
 	QString type;
+	int count;
 	QLabel *label;
 };
 
@@ -36,15 +39,18 @@ signals:
 	void addModelRequest(QString, QString);
 	void sendMes(QString);
 
+public slots:
+	void deleteModel(QString);
+
 private:
 	//ÃûÃüÒýÇæ
-	QString getName(QString);
+	modelInfo getModel(QString);
 
 private:
 	QList<modelInfo> modelList;
-	QSet<int> CNameSet;
-	QSet<int> MatlabNameSet;
-	QSet<int> AdamsNameSet;
+	std::set<int> CNameSet;
+	std::set<int> MatlabNameSet;
+	std::set<int> AdamsNameSet;
 };
 
 #endif // DROPLABEL_H
