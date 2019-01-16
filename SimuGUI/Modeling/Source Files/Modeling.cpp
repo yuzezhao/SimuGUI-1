@@ -8,6 +8,7 @@ Modeling::Modeling(QWidget *parent) : IMode(parent) {
 	setIcon(QIcon("./Icon/mode/model"));
 
 	createWindow();
+
 }
 
 void Modeling::createWindow() {
@@ -25,6 +26,10 @@ void Modeling::createWindow() {
 
 	connect(m_pModelLabel, SIGNAL(addModelRequest(QString, QString)),
 		this, SLOT(addModel(QString, QString)));
+
+	//test
+	connect(m_pModelLabel, SIGNAL(sendMes(QString)),
+		this, SLOT(receiveMes(QString)));
 
 	QGridLayout *layout = new QGridLayout();
 	layout->setMargin(10);
@@ -100,4 +105,10 @@ void Modeling::addModel(QString modelName, QString modelType) {
 	m_pModelList->setItem(row, 0, new QTableWidgetItem(modelName));
 	m_pModelList->setItem(row, 1, new QTableWidgetItem(modelType));
 	m_pModelList->setItem(row, 2, new QTableWidgetItem(QIcon("./Icon/tools/delete"), NULL));
+}
+
+void Modeling::receiveMes(QString s) {
+	int row = m_pModelList->rowCount();
+	m_pModelList->insertRow(row);
+	m_pModelList->setItem(row, 0, new QTableWidgetItem(s));
 }

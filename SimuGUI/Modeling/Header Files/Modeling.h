@@ -26,6 +26,7 @@ signals:
 
 public slots:
 	void addModel(QString, QString);
+	void receiveMes(QString);
 
 private:
 	void createWindow();

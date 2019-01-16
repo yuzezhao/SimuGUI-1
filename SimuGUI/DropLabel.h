@@ -10,6 +10,9 @@
 #define MatlabType "Matlab"
 #define AdamsType "Adams"
 
+#define DRAG_MOVE "Drag_Move"
+#define DRAP_COPY "Drag_Copy"
+
 struct modelInfo {
 	QString name;
 	QString type;
@@ -23,13 +26,18 @@ class DropLabel :public QLabel {
 public:
 	explicit DropLabel(QWidget *p = 0);
 
-	void dragEnterEvent(QDragEnterEvent*);
-	void dropEvent(QDropEvent*);
+	virtual void dragEnterEvent(QDragEnterEvent*);
+	virtual void dropEvent(QDropEvent*);
+
+	virtual void mousePressEvent(QMouseEvent *);
+	virtual void dragMoveEvent(QDragMoveEvent *);
 
 signals:
 	void addModelRequest(QString, QString);
+	void sendMes(QString);
 
 private:
+	//ÃûÃüÒýÇæ
 	QString getName(QString);
 
 private:

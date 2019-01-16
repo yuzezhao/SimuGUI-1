@@ -70,11 +70,11 @@ void ToolDragStack::mousePressEvent(QMouseEvent *event) {
 
 		QMimeData *md = new QMimeData;
 		md->setImageData(m_dragLabel->pixmap()->toImage());
+		md->setText(DRAP_COPY);
 		md->setObjectName(modelType);
 		dg->setMimeData(md);
 		dg->exec();
 	}
-	//QWidget::mousePressEvent(event);
 }
 
 void ToolDragStack::putImage(QString path, QLabel *label) {
